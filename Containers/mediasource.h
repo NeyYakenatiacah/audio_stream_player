@@ -15,8 +15,6 @@ public:
     static MediaSource * instance(MetaData metaData, QObject *parent = nullptr);
     static MediaSource * instance(const QJsonObject & obj, QObject *parent = nullptr);
 
-    bool isValid() const;
-
     QString getMetaData(const QString &key) const;
     void setValue();
 

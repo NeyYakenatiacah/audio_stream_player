@@ -3,7 +3,7 @@
 
 namespace asp
 {
-    enum Formats
+    enum Format
     {
         m3u  = 0,
         mp3  = 1,
