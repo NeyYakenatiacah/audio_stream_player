@@ -1,7 +1,7 @@
 #ifndef METADATA_H
 #define METADATA_H
 
-#include <string>
+#include <QString>
 
 class MetaData
 {
@@ -11,12 +11,14 @@ public:
     MetaData(MetaData && other);
     ~MetaData();
 
-    std::string keys() const;
-    bool contains(const std::string & key) const;
+    QString keys() const;
+    bool contains(const QString & key) const;
 
-    std::string   operator[](const std::string & key) const;
-    std::string & operator[](const std::string & key);
+    QString   operator[](const QString & key) const;
+    QString & operator[](const QString & key);
 
+private:
+    // some data
 };
 
 #endif // METADATA_H
