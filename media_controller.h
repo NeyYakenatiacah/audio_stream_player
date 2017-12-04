@@ -4,6 +4,7 @@
 #include <QObject>
 
 class VlcEqualizer;
+class VlcMedia;
 class VlcMediaPlayer;
 
 
