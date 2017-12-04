@@ -1,7 +1,8 @@
 #ifndef METADATA_H
 #define METADATA_H
 
-#include <QString>
+class QJsonObject;
+class QString;
 
 class MetaData
 {
@@ -17,6 +18,8 @@ public:
     QString   operator[](const QString & key) const;
     QString & operator[](const QString & key);
 
+    static MetaData fromJson(const QJsonObject & obj);
+    QJsonObject toJson() const;
 private:
     // some data
 };
