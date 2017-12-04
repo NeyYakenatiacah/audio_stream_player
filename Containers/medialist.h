@@ -14,7 +14,7 @@ public:
     MediaSource * getMedia(int) const;
 
     void addMediaSource(const QString & path);
-    void removeMediaSource(const Source * src);
+    void removeMediaSource(const MediaSource * src);
 
 
 signals:
