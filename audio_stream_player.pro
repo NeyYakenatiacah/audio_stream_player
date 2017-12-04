@@ -29,9 +29,11 @@ HEADERS += \
     streamplayer.h \
     settings.h \
     source.h \
-    iplayer.h
+    iplayer.h \
+    mediacontroller.h
 
 SOURCES += main.cpp \
     streamplayer.cpp \
     settings.cpp \
-    source.cpp
+    source.cpp \
+    mediacontroller.cpp
