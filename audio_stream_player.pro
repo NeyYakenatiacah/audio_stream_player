@@ -30,10 +30,17 @@ HEADERS += \
     settings.h \
     source.h \
     iplayer.h \
-    mediacontroller.h
+    mediacontroller.h \
+    Containers/mediasource.h \
+    Containers/medialist.h \
+    Containers/constants.h \
+    Containers/metadata.h
 
 SOURCES += main.cpp \
     streamplayer.cpp \
     settings.cpp \
     source.cpp \
-    mediacontroller.cpp
+    mediacontroller.cpp \
+    Containers/mediasource.cpp \
+    Containers/medialist.cpp \
+    Containers/metadata.cpp
