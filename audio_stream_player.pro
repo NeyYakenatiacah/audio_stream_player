@@ -1,10 +1,6 @@
 QT += quick widgets multimedia
 CONFIG += c++11
 
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which as been marked deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
 
 # You can also make your code fail to compile if you use deprecated APIs.
@@ -25,6 +21,21 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+INCLUDEPATH += $$PWD/../3rdparty/libvlc/include
+DEPENDPATH  += $$PWD/../3rdparty/libvlc/include
+
+CONFIG(debug, debug|release)
+{
+    LIBS += -L$$PWD/../3rdparty/libvlc/lib
+    LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
+}
+
+CONFIG(release, debug|release)
+{
+    LIBS += -L$$PWD/../3rdparty/libvlc/lib
+    LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
+}
+
 HEADERS += \
     streamplayer.h \
     settings.h \
@@ -34,7 +45,8 @@ HEADERS += \
     Containers/mediasource.h \
     Containers/medialist.h \
     Containers/constants.h \
-    Containers/metadata.h
+    Containers/metadata.h \
+    media_controller.h
 
 SOURCES += main.cpp \
     streamplayer.cpp \
@@ -43,4 +55,5 @@ SOURCES += main.cpp \
     mediacontroller.cpp \
     Containers/mediasource.cpp \
     Containers/medialist.cpp \
-    Containers/metadata.cpp
+    Containers/metadata.cpp \
+    media_controller.cpp
