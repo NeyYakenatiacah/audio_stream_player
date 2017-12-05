@@ -10,7 +10,6 @@ MediaController::MediaController(QObject *parent) : QObject(parent)
     m_player = new VlcMediaPlayer();
     m_player->setParent(this);
 
-
     connect(m_player, &VlcMediaPlayer::stopped,             this, &MediaController::stopped);
     connect(m_player, &VlcMediaPlayer::paused,              this, &MediaController::paused);
     connect(m_player, &VlcMediaPlayer::playing,             this, &MediaController::playing);
@@ -19,7 +18,7 @@ MediaController::MediaController(QObject *parent) : QObject(parent)
     connect(m_player, &VlcMediaPlayer::positionChanged,     this, &MediaController::positionChanged);
     connect(m_player, &VlcMediaPlayer::playbackRateChanged, this, &MediaController::playbackRateChanged);
 
-    connect(m_player, &VlcMediaPlayer::vout,       this, &MediaController::voutAvailable);
+    connect(m_player, &VlcMediaPlayer::vout,                this, &MediaController::voutAvailable);
     connect(m_player, &VlcMediaPlayer::stateChanged,        this, &MediaController::stateChanged);
     connect(m_player, &VlcMediaPlayer::error,               this, &MediaController::error);
 

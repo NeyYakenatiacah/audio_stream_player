@@ -41,19 +41,19 @@ HEADERS += \
     settings.h \
     source.h \
     iplayer.h \
-    mediacontroller.h \
     Containers/mediasource.h \
     Containers/medialist.h \
     Containers/constants.h \
     Containers/metadata.h \
-    media_controller.h
+    media_controller.h \
+    Containers/media_source.h
 
 SOURCES += main.cpp \
     streamplayer.cpp \
     settings.cpp \
     source.cpp \
-    mediacontroller.cpp \
     Containers/mediasource.cpp \
     Containers/medialist.cpp \
     Containers/metadata.cpp \
-    media_controller.cpp
+    media_controller.cpp \
+    Containers/media_source.cpp

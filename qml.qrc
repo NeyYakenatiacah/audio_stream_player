@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>content/MediaSourceView.qml</file>
+        <file>content/EqualizerPad.qml</file>
     </qresource>
 </RCC>
