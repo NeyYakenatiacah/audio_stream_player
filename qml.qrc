@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>content/MediaSourceView.qml</file>
         <file>content/EqualizerPad.qml</file>
+        <file>content/PlayerView.qml</file>
+        <file>content/DisplayView.qml</file>
+        <file>content/PlaylistView.qml</file>
     </qresource>
 </RCC>
