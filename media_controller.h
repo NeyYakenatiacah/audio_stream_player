@@ -51,8 +51,8 @@ signals:
     void playing ();
     void end ();
 
-    void positionChanged(float);
-    void playbackRateChanged(float);
+    void positionChanged(float pos);
+    void playbackRateChanged(float rate);
 
     void voutAvailable (int count);
 

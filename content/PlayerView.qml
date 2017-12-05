@@ -74,6 +74,8 @@ Rectangle {
 
                 width: parent.height - 6
                 height: width
+
+
             }
 
             RoundButton {
@@ -86,6 +88,8 @@ Rectangle {
 
                 width: parent.height - 6
                 height: width
+
+                onClicked: mainwindow.keyPressed(qsTr("play"))
             }
 
             RoundButton {
@@ -98,6 +102,8 @@ Rectangle {
 
                 width: parent.height - 6
                 height: width
+
+                onClicked: mainwindow.keyPressed(qsTr("stop"))
             }
 
             RoundButton {
@@ -111,9 +117,7 @@ Rectangle {
                 width: parent.height - 6
                 height: width
 
-                onClicked: {
-
-                }
+                onClicked: mainwindow.keyPressed(qsTr("forward"))
             }
         }
     }
