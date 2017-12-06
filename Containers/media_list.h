@@ -4,6 +4,7 @@
 #include <QObject>
 
 class MediaSource;
+class VlcInstance;
 class MediaList : public QObject
 {
     Q_OBJECT

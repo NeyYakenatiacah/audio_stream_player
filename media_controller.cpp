@@ -1,14 +1,15 @@
 #include "media_controller.h"
 
+#include <VLCQtCore/Common.h>
+#include <VLCQtCore/Equalizer.h>
+#include <VLCQtCore/Instance.h>
 #include <VLCQtCore/Media.h>
 #include <VLCQtCore/MediaPlayer.h>
-#include <VLCQtCore/Instance.h>
-#include <VLCQtCore/Equalizer.h>
 
 MediaController::MediaController(QObject *parent) : QObject(parent)
 {
-    m_player = new VlcMediaPlayer();
-    m_player->setParent(this);
+    m_instance = new VlcInstance (VlcCommon::args(), this);
+    m_player   = new VlcMediaPlayer (m_instance);
 
     connect(m_player, &VlcMediaPlayer::stopped,             this, &MediaController::stopped);
     connect(m_player, &VlcMediaPlayer::paused,              this, &MediaController::paused);
@@ -48,6 +49,16 @@ void MediaController::resume()
     m_player->resume();
 }
 
+void MediaController::toForward()
+{
+    emit forward();
+}
+
+void MediaController::toBackward()
+{
+    emit backward();
+}
+
 float MediaController::playbackRate() const
 {
     return m_player->playbackRate();
@@ -67,6 +78,7 @@ float MediaController::postition() const
 void MediaController::setPostition(float postition)
 {
     m_player->setPosition(postition);
+    emit positionChanged(m_player->position());
 }
 
 bool MediaController::autoPlayMode() const

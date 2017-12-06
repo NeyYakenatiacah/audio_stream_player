@@ -1,23 +1,23 @@
 #ifndef MEDIA_SOURCE_H
 #define MEDIA_SOURCE_H
 
-#include <memory>
-#include <QObject>
+#include <VLCQtCore/Media.h>
 
-class VlcMedia;
-
-class MediaSource : public QObject
+class MediaSource : public VlcMedia
 {
     Q_OBJECT
 public:
-    explicit MediaSource(QObject *parent = nullptr);
+    explicit MediaSource(const QString &location, bool localFile, VlcInstance *instance);
+    explicit MediaSource(const QString &location, VlcInstance *instance);
+    virtual ~MediaSource();
 
+    const QJsonObject & toJson() const;
 signals:
 
 public slots:
 
 private:
-    std::shared_ptr<VlcMedia*> m_media;
+
 };
 
 #endif // MEDIA_SOURCE_H

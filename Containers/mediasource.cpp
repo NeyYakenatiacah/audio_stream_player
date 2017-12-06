@@ -50,7 +50,7 @@ QString MediaSource::getMetaData(const QString &key) const
     return m_data[key];
 }
 
-QString MediaSource::operator [] (const QString &key)
+QString & MediaSource::operator [] (const QString &key)
 {
     if(m_data.contains(key))
         return m_data[key];

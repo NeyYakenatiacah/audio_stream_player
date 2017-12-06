@@ -21,39 +21,41 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$PWD/../3rdparty/libvlc/include
-DEPENDPATH  += $$PWD/../3rdparty/libvlc/include
+INCLUDEPATH += $$3RDPARTY/msvc15/libvlc/include
+DEPENDPATH += $$3RDPARTY/msvc15/libvlc/include
+#INCLUDEPATH += $$PWD/../3rdparty/libvlc/include
+#DEPENDPATH  += $$PWD/../3rdparty/libvlc/include
 
 CONFIG(debug, debug|release)
 {
-    LIBS += -L$$PWD/../3rdparty/libvlc/lib
+    LIBS += -L$$3RDPARTY/msvc15/libvlc/lib
     LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
 }
 
 CONFIG(release, debug|release)
 {
-    LIBS += -L$$PWD/../3rdparty/libvlc/lib
+    LIBS += -L$$3RDPARTY/msvc15/libvlc/lib
     LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
 }
 
 HEADERS += \
-    streamplayer.h \
+#    streamplayer.h \
     settings.h \
-    source.h \
+#    source.h \
     iplayer.h \
     Containers/mediasource.h \
-    Containers/medialist.h \
-    Containers/constants.h \
+#    Containers/constants.h \
     Containers/metadata.h \
     media_controller.h \
-    Containers/media_source.h
+    Containers/media_source.h \
+    Containers/media_list.h
 
 SOURCES += main.cpp \
-    streamplayer.cpp \
+#    streamplayer.cpp \
     settings.cpp \
-    source.cpp \
+#    source.cpp \
     Containers/mediasource.cpp \
-    Containers/medialist.cpp \
     Containers/metadata.cpp \
     media_controller.cpp \
-    Containers/media_source.cpp
+    Containers/media_source.cpp \
+    Containers/media_list.cpp

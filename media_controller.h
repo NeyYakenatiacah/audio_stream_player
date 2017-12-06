@@ -4,6 +4,7 @@
 #include <QObject>
 
 class VlcEqualizer;
+class VlcInstance;
 class VlcMedia;
 class VlcMediaPlayer;
 
@@ -21,6 +22,9 @@ public:
     Q_INVOKABLE void pause ();
     Q_INVOKABLE void stop ();
     Q_INVOKABLE void resume ();
+
+    Q_INVOKABLE void toForward();
+    Q_INVOKABLE void toBackward();
 
 
     float playbackRate() const;
@@ -67,6 +71,7 @@ private:
     bool m_autoPlayMode;
 
     VlcMediaPlayer * m_player;
+    VlcInstance * m_instance;
 };
 
 #endif // MEDIA_CONTROLLER_H
