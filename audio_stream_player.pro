@@ -1,3 +1,27 @@
+LIBVLC = $$(LIBVLC_PATH)
+BOOST  = $$(BOOST_PATH)
+
+isEmpty(LIBVLC) {
+   warning("You have to set LIBVLC_PATH variable!")
+}
+
+#isEmpty(BOOST) {
+#   warning("You have to set BOOST_PATH variable!")
+#}
+
+INCLUDEPATH += $$LIBVLC/include
+CONFIG(debug, debug|release)
+{
+    LIBS += -L$$LIBVLC/lib
+    LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
+}
+CONFIG(release, debug|release)
+{
+    LIBS += -L$$LIBVLC/lib
+    LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
+}
+
+
 QT += qml quick widgets multimedia
 CONFIG += c++11
 
