@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include "Containers/constants.h"
-#include "Containers/metadata.h"
+#include "Containers/meta_data.h"
 
 class MediaSource : public QObject
 {

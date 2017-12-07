@@ -5,18 +5,18 @@ isEmpty(LIBVLC) {
    warning("You have to set LIBVLC_PATH variable!")
 }
 
-#isEmpty(BOOST) {
-#   warning("You have to set BOOST_PATH variable!")
-#}
+isEmpty(BOOST) {
+   #warning("You have to set BOOST_PATH variable!")
+}
 
 INCLUDEPATH += $$LIBVLC/include
-CONFIG(debug, debug|release)
-{
+
+CONFIG(debug, debug|release) {
     LIBS += -L$$LIBVLC/lib
     LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
 }
-CONFIG(release, debug|release)
-{
+
+CONFIG(release, debug|release) {
     LIBS += -L$$LIBVLC/lib
     LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
 }
@@ -69,17 +69,17 @@ HEADERS += \
     iplayer.h \
     Containers/mediasource.h \
 #    Containers/constants.h \
-    Containers/metadata.h \
     media_controller.h \
     Containers/media_source.h \
-    Containers/media_list.h
+    Containers/media_list.h \
+    Containers/meta_data.h
 
 SOURCES += main.cpp \
 #    streamplayer.cpp \
     settings.cpp \
 #    source.cpp \
     Containers/mediasource.cpp \
-    Containers/metadata.cpp \
     media_controller.cpp \
     Containers/media_source.cpp \
-    Containers/media_list.cpp
+    Containers/media_list.cpp \
+    Containers/meta_data.cpp

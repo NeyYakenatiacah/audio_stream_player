@@ -8,7 +8,6 @@ class VlcInstance;
 class VlcMedia;
 class VlcMediaPlayer;
 
-
 class MediaController : public QObject
 {
     Q_OBJECT
