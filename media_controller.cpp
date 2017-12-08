@@ -17,7 +17,7 @@ MediaController::MediaController(QObject *parent) : QObject(parent)
     connect(m_player, &VlcMediaPlayer::stopped,             this, &MediaController::stopped);
 
     connect(m_player, &VlcMediaPlayer::positionChanged,     this, &MediaController::positionChanged);
-    connect(m_player, &VlcMediaPlayer::playbackRateChanged, this, &MediaController::playbackRateChanged);
+    //connect(m_player, &VlcMediaPlayer::playbackRateChanged, this, &MediaController::playbackRateChanged);
 
     connect(m_player, &VlcMediaPlayer::vout,                this, &MediaController::voutAvailable);
     connect(m_player, &VlcMediaPlayer::stateChanged,        this, &MediaController::stateChanged);
@@ -78,6 +78,7 @@ float MediaController::postition() const
 void MediaController::setPostition(float postition)
 {
     m_player->setPosition(postition);
+    
     emit positionChanged(m_player->position());
 }
 

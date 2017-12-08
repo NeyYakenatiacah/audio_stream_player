@@ -4,18 +4,18 @@
 #include <VLCQtCore/Common.h>
 
 #include "media_controller.h"
-
+#include <QDebug>
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setApplicationName("VLC-Qt Stream Player");
-    QCoreApplication::setAttribute(Qt::AA_X11InitThreads);
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
+
+    QGuiApplication::setApplicationName("Vlc_qt stream player");
+    QGuiApplication::setAttribute(Qt::AA_X11InitThreads);
+    QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     VlcCommon::setPluginPath(app.applicationDirPath() + "/plugins");
 
-    qmlRegisterType<MediaController>("asp.MediaController", 0, 2, "MediaController");
+    //qmlRegisterType<MediaController>("asp.MediaController", 0, 2, "MediaController");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

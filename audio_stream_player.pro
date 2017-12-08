@@ -13,16 +13,16 @@ INCLUDEPATH += $$LIBVLC/include
 
 CONFIG(debug, debug|release) {
     LIBS += -L$$LIBVLC/lib
-    LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
+    LIBS += -lVLCQtCored
 }
 
 CONFIG(release, debug|release) {
     LIBS += -L$$LIBVLC/lib
-    LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
+    LIBS += -lVLCQtCore
 }
 
 
-QT += qml quick widgets multimedia
+QT += qml quick widgets
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS
@@ -45,29 +45,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$3RDPARTY/msvc15/libvlc/include
-DEPENDPATH += $$3RDPARTY/msvc15/libvlc/include
-#INCLUDEPATH += $$PWD/../3rdparty/libvlc/include
-#DEPENDPATH  += $$PWD/../3rdparty/libvlc/include
-
-CONFIG(debug, debug|release)
-{
-    LIBS += -L$$3RDPARTY/msvc15/libvlc/lib
-    LIBS += -lVLCQtCored.dll -lVLCQtQmld.dll
-}
-
-CONFIG(release, debug|release)
-{
-    LIBS += -L$$3RDPARTY/msvc15/libvlc/lib
-    LIBS += -lVLCQtCore.dll -lVLCQtQml.dll
-}
-
 HEADERS += \
 #    streamplayer.h \
-    settings.h \
+#    settings.h \
 #    source.h \
-    iplayer.h \
-    Containers/mediasource.h \
+#    iplayer.h \
+#    Containers/mediasource.h \
 #    Containers/constants.h \
     media_controller.h \
     Containers/media_source.h \
@@ -76,9 +59,9 @@ HEADERS += \
 
 SOURCES += main.cpp \
 #    streamplayer.cpp \
-    settings.cpp \
+#    settings.cpp \
 #    source.cpp \
-    Containers/mediasource.cpp \
+#    Containers/mediasource.cpp \
     media_controller.cpp \
     Containers/media_source.cpp \
     Containers/media_list.cpp \
