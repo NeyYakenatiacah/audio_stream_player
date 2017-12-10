@@ -57,7 +57,7 @@ HEADERS += \
     Containers/media_list.h \
     Containers/meta_data.h \
     media_list_manager.h \
-    Containers/inner/media_list_private.h \
+    Containers/Data/media_list_private.h \
     Containers/Filters/filter_manager.h \
     Containers/Filters/filter_sequence.h \
     Containers/Filters/ifilter.h \
@@ -73,7 +73,7 @@ SOURCES += main.cpp \
     Containers/media_list.cpp \
     Containers/meta_data.cpp \
     media_list_manager.cpp \
-    Containers/inner/media_list_private.cpp \
+    Containers/Data/media_list_private.cpp \
     Containers/Filters/filter_manager.cpp \
     Containers/Filters/filter_sequence.cpp \
     Containers/Filters/impl/title_filter.cpp
