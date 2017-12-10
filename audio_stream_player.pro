@@ -46,17 +46,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-#    streamplayer.h \
-#    settings.h \
-#    source.h \
-#    iplayer.h \
-#    Containers/mediasource.h \
-#    Containers/constants.h \
     media_controller.h \
     Containers/media_source.h \
-    Containers/media_list.h \
-    Containers/meta_data.h \
-    media_list_manager.h \
+#    Containers/media_list.h \
+#    Containers/meta_data.h \
+#    media_list_manager.h \
     Containers/Data/media_list_private.h \
     Containers/Filters/filter_manager.h \
     Containers/Filters/filter_sequence.h \
@@ -64,15 +58,11 @@ HEADERS += \
     Containers/Filters/impl/title_filter.h
 
 SOURCES += main.cpp \
-#    streamplayer.cpp \
-#    settings.cpp \
-#    source.cpp \
-#    Containers/mediasource.cpp \
     media_controller.cpp \
     Containers/media_source.cpp \
-    Containers/media_list.cpp \
-    Containers/meta_data.cpp \
-    media_list_manager.cpp \
+#    Containers/media_list.cpp \
+#    Containers/meta_data.cpp \
+#    media_list_manager.cpp \
     Containers/Data/media_list_private.cpp \
     Containers/Filters/filter_manager.cpp \
     Containers/Filters/filter_sequence.cpp \

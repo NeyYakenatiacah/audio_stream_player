@@ -11,7 +11,7 @@ bool FilterSequence::operator ()(const MediaSource * src)
 {
     for(const IFilter * filter : m_filters)
     {
-        if(!filter(src)) return false;
+        if(!filter->filter(src)) return false;
     }
 
     return true;

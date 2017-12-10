@@ -8,6 +8,7 @@ class MediaSource;
 
 class FilterManager : public QObject
 {
+    Q_OBJECT
 public:
     explicit FilterManager(QObject * parent = nullptr);
     virtual ~FilterManager();

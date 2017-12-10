@@ -3,8 +3,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Window 2.3
 
-import asp.MediaController 1.0
-import "content"
+//import asp.MediaController 1.0
+//import "content"
 
 ApplicationWindow {
     id: mainwindow
@@ -26,7 +26,7 @@ ApplicationWindow {
     footer: {
 
     }
-
+/*
     PlayerView {
         id: pl_view
 
@@ -79,5 +79,5 @@ ApplicationWindow {
     function setPlaybackRate(rate) {
         controller.playbackRate = rate
     }
-
+*/
 }

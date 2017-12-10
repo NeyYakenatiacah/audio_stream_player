@@ -1,6 +1,8 @@
 #ifndef FILTERSEQUENCE_H
 #define FILTERSEQUENCE_H
 
+#include <QList>
+
 class IFilter;
 class MediaSource;
 

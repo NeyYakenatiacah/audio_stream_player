@@ -83,10 +83,12 @@ QStringList FilterManager::availableFilters() const
 
 QList<MediaSource *> FilterManager::filter(QList<MediaSource *> src)
 {
-    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced(src, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, const MediaSource * src)
-    {
-        dst.append(src);
-    });
+//    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced(src, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
+//    {
+//        dst.append(src);
+//    });
 
-    return dst_list.result();
+//    return dst_list.result();
+    QList<MediaSource*> list;
+    return list;
 }

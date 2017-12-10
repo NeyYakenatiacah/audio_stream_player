@@ -27,6 +27,7 @@ public slots:
 
 private:
     VlcInstance * m_instance;
+    QList<MediaSource *> m_sources;
 };
 
 #endif // MEDIA_LIST_PRIVATE_H

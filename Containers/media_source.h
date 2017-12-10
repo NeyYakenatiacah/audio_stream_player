@@ -8,7 +8,7 @@ class VlcMetaManager;
 class MediaSource : public VlcMedia
 {
     Q_OBJECT
-
+/*
     Q_PROPERTY(QString artwork     READ artwork     NOTIFY artworkChanged )
     Q_PROPERTY(QString trackID     READ trackID     NOTIFY trackIDChanged )
     Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged  )
@@ -26,16 +26,17 @@ class MediaSource : public VlcMedia
     Q_PROPERTY(QString encoder     READ encoder     WRITE setEncoder     NOTIFY encoderChanged     ) // ????
     Q_PROPERTY(  int   trackNumber READ trackNumber WRITE setTrackNumber NOTIFY trackNumberChanged )
     Q_PROPERTY(  int   year        READ year        WRITE setYear        NOTIFY yearChanged        )    // ??
-
+*/
     Q_ENUM(Vlc::Meta)
 
 public:
     explicit MediaSource(const QString & location, bool localFile, VlcInstance * instance);
     explicit MediaSource(const QString & location, VlcInstance * instance);
-    explicit MediaSource(const QJsonObject & json, VlcInstance * instance);
     virtual ~MediaSource();
 
-    const QJsonObject & toJson() const;
+    static MediaSource * fromJson(const QJsonObject & json, VlcInstance * instance);
+
+    const QJsonObject toJson() const;
 
     // Properties
 
@@ -107,25 +108,6 @@ signals:
 public slots:
 
 private:
-    QString m_title;
-    QString m_artist;
-    QString m_genre;
-    QString m_copyright;
-    QString m_album;
-    QString m_trackNumber;
-    QString m_description;
-    QString m_rating;
-    QString m_date;
-    QString m_setting;
-    QString m_url;
-    QString m_language;
-    QString m_nowPlaying;
-    QString m_publisher;
-    QString m_encodedBy;
-    QString m_artworkURL;
-    QString m_trackID;
-
-
     void init();
 
     VlcMetaManager * m_metaManager;

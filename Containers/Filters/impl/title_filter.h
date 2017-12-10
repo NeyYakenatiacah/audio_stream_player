@@ -9,7 +9,8 @@ public:
     TitleFilter(const QString & sub_string);
 
     // IFilter interface
-    virtual bool operator ()(const MediaSource *src) override;
+    virtual bool operator ()(const MediaSource *src) const override;
+    virtual bool filter(const MediaSource * src) const override;
     virtual Vlc::Meta type() const override;
 
     void setRequired(const QString & sub_string);
