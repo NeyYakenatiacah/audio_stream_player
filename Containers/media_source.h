@@ -27,6 +27,7 @@ class MediaSource : public VlcMedia
     Q_PROPERTY(  int   trackNumber READ trackNumber WRITE setTrackNumber NOTIFY trackNumberChanged )
     Q_PROPERTY(  int   year        READ year        WRITE setYear        NOTIFY yearChanged        )    // ??
 
+    Q_ENUM(Vlc::Meta)
 
 public:
     explicit MediaSource(const QString & location, bool localFile, VlcInstance * instance);
@@ -100,6 +101,8 @@ signals:
     void artworkChanged();
     void trackIDChanged();
     void nowPlaying();
+
+    void prepareToRemove();
 
 public slots:
 

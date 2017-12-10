@@ -1,22 +1,37 @@
-#include "medialist.h"
+#include "media_list.h"
 
-MediaList::MediaList(QObject *parent) : QObject(parent)
+#include <VLCQtCore/Instance.h>
+
+#include "media_source.h"
+
+MediaList::MediaList(VlcInstance *instance)
+    : QObject(instance)
+{
+
+}
+
+MediaList::MediaList(const QString &path, VlcInstance *instance)
+    : QObject(instance)
 {
 
 }
 
 MediaList::~MediaList()
 {
+//    for(MediaSource * src : m_sources)
+//    {
+//        delete src;
+//    }
+//    m_sources.clear();
 
+//    m_buffer.clear();
 }
 
-void MediaList::addMediaSource(const QString &path)
+void MediaList::openLocalFile(const QString &path)
 {
+    MediaSource * src = new MediaSource(path, true, m_instance);
 
-}
-
-void MediaList::removeMediaSource(const MediaSource *src)
-{
+    m_sources.append(src);
 
 }
 
@@ -29,3 +44,5 @@ void MediaList::loadListFrom(const QString &path)
 {
 
 }
+
+

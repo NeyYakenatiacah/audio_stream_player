@@ -40,6 +40,8 @@ MediaSource::MediaSource(const QJsonObject & json, VlcInstance * instance)
 
 MediaSource::~MediaSource()
 {
+    emit prepareToRemove();
+
     delete m_metaManager;
 }
 
