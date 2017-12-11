@@ -39,12 +39,17 @@ void MediaList::openUrl(const QString &url)
     m_data->openMedia(path, false);
 }
 
-void MediaList::saveListAs(const QString &path) const
+void MediaList::search(const QString &tag)
+{
+
+}
+
+bool MediaList::saveListAs(const QString &path) const
 {
     m_data->save(path);
 }
 
-void MediaList::loadListFrom(const QString &path)
+bool MediaList::loadListFrom(const QString &path)
 {
     m_data->load(path);
 }
