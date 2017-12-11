@@ -2,6 +2,7 @@
 
 #include <VLCQtCore/Instance.h>
 
+#include "Data/media_list_private.h"
 #include "media_source.h"
 
 MediaList::MediaList(VlcInstance *instance)
@@ -13,7 +14,8 @@ MediaList::MediaList(VlcInstance *instance)
 MediaList::MediaList(const QString &path, VlcInstance *instance)
     : QObject(instance)
 {
-
+    //m_instance = instance;
+    m_data = new MediaListPrivate(instance);
 }
 
 MediaList::~MediaList()
@@ -29,20 +31,22 @@ MediaList::~MediaList()
 
 void MediaList::openLocalFile(const QString &path)
 {
-    MediaSource * src = new MediaSource(path, true, m_instance);
+    m_data->openMedia(path, true);
+}
 
-    m_sources.append(src);
-
+void MediaList::openUrl(const QString &url)
+{
+    m_data->openMedia(path, false);
 }
 
 void MediaList::saveListAs(const QString &path) const
 {
-
+    m_data->save(path);
 }
 
 void MediaList::loadListFrom(const QString &path)
 {
-
+    m_data->load(path);
 }
 
 

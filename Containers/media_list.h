@@ -3,8 +3,11 @@
 
 #include <QObject>
 
+class MediaListPrivate;
 class MediaSource;
 class VlcInstance;
+
+
 
 class MediaList : public QObject
 {
@@ -27,9 +30,9 @@ public:
     Q_INVOKABLE void openLocalFile(const QString & path);
     Q_INVOKABLE void openUrl(const QString& url);
 
-    Q_INVOKABLE void sort(/* const Vlc::Meta & tag */);
+    Q_INVOKABLE void sort(const Vlc::Meta & type);
 
-    Q_INVOKABLE void search(const QString & tag);
+    Q_INVOKABLE void search(const Vlc::Meta & type, const QString & tag);
 
 signals:
     void reloaded();
@@ -39,14 +42,15 @@ public slots:
 
 private:
 
-    void saveListAs(const QString & path) const;
-    void loadListFrom(const QString & path);
-    void loadDefaultList();
+    //bool saveBufferList(path);
+    bool saveListAs(const QString & path) const;
+    bool loadListFrom(const QString & path);
 
     VlcInstance * m_instance;
     //MediaSource * selectedMedia;
     //QList<MediaSource *> m_buffer;
 
+    MediaListPrivate * m_data;
     QList<MediaSource *> m_sources;
 };
 

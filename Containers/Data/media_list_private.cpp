@@ -49,6 +49,8 @@ bool MediaListPrivate::load(const QString &path)
 {
     Q_UNUSED(path)
 
+    emit reloaded();
+
     return false;
 }
 

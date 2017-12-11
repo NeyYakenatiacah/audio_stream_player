@@ -48,7 +48,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     media_controller.h \
     Containers/media_source.h \
-#    Containers/media_list.h \
+    #Containers/media_list.h \
 #    Containers/meta_data.h \
 #    media_list_manager.h \
     Containers/Data/media_list_private.h \
@@ -60,7 +60,7 @@ HEADERS += \
 SOURCES += main.cpp \
     media_controller.cpp \
     Containers/media_source.cpp \
-#    Containers/media_list.cpp \
+    #Containers/media_list.cpp \
 #    Containers/meta_data.cpp \
 #    media_list_manager.cpp \
     Containers/Data/media_list_private.cpp \
