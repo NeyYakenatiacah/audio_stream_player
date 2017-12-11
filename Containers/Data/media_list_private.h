@@ -15,6 +15,9 @@ public:
 
     void openMedia(const QString & location, bool isLocalFile);
 
+    QList<MediaSource *>::const_iterator begin() const;
+    QList<MediaSource *>::const_iterator end()   const;
+
     bool load(const QString & path);
     bool save(const QString & path);
 

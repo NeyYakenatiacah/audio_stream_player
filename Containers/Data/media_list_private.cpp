@@ -35,6 +35,16 @@ void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
     emit added(src);
 }
 
+QList<MediaSource *>::const_iterator MediaListPrivate::begin() const
+{
+    return m_sources.constBegin();
+}
+
+QList<MediaSource *>::const_iterator MediaListPrivate::end() const
+{
+    return m_sources.constEnd();
+}
+
 bool MediaListPrivate::load(const QString &path)
 {
     Q_UNUSED(path)
