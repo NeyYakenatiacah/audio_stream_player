@@ -92,3 +92,16 @@ QList<MediaSource *> FilterManager::filter(QList<MediaSource *> src)
     QList<MediaSource*> list;
     return list;
 }
+
+QList<MediaSource *> FilterManager::filter(const QList<MediaSource *>::const_iterator &begin,
+                                           const QList<MediaSource *>::const_iterator &end)
+{
+    //    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced(begin, end, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
+    //    {
+    //        dst.append(src);
+    //    });
+
+    //    return dst_list.result();
+    QList<MediaSource*> list;
+    return list;
+}

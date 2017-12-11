@@ -21,6 +21,8 @@ public:
     QStringList availableFilters() const;
 
     QList<MediaSource *> filter(QList<MediaSource *> src);
+    QList<MediaSource *> filter(const QList<MediaSource *>::const_iterator & begin,
+                                const QList<MediaSource *>::const_iterator & end);
 
 signals:
     void preparedToFiltration();

@@ -29,8 +29,8 @@ public:
     float playbackRate() const;
     void setPlaybackRate(float playbackRate);
 
-    float postition() const;
-    void setPostition(float postition);
+    float position() const;
+    void setPosition(float position);
 
     bool autoPlayMode() const;
     void setAutoPlayMode(bool autoPlayMode);
