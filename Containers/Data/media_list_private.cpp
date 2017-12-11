@@ -15,6 +15,11 @@ MediaListPrivate::MediaListPrivate(VlcInstance * instance) : QObject(instance)
     m_instance = instance ? instance : new VlcInstance(VlcCommon::args());
 }
 
+MediaListPrivate::~MediaListPrivate()
+{
+    if(!this->parent()) delete m_instance;
+}
+
 void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
 {
     MediaSource * src = new MediaSource(location, isLocalFile, m_instance);
@@ -22,7 +27,7 @@ void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
     connect(src, &MediaSource::prepareToRemove, this, [this]()
     {
         MediaSource * source = qobject_cast<MediaSource*>(this->sender());
-        m_sources.removeAll(sender);
+        m_sources.removeAll(source);
     });
 
     m_sources.append(src);
@@ -32,6 +37,8 @@ void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
 
 bool MediaListPrivate::load(const QString &path)
 {
+    Q_UNUSED(path)
+
     return false;
 }
 
@@ -54,7 +61,7 @@ bool MediaListPrivate::save(const QString &path)
 
         QJsonDocument doc(obj);
 
-        out << doc.toJson();
+        out.write(doc.toJson());
 
         out.close();
 

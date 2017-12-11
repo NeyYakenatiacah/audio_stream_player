@@ -16,7 +16,7 @@ public:
     void openMedia(const QString & location, bool isLocalFile);
 
     bool load(const QString & path);
-    void save(const QString & path);
+    bool save(const QString & path);
 
 signals:
     void reloaded();
