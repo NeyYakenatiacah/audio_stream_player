@@ -8,6 +8,7 @@
 MediaList::MediaList(VlcInstance *instance)
     : QObject(instance)
 {
+    m_data = new MediaListPrivate(instance);
 
 }
 
@@ -36,10 +37,15 @@ void MediaList::openLocalFile(const QString &path)
 
 void MediaList::openUrl(const QString &url)
 {
-    m_data->openMedia(path, false);
+   m_data->openMedia(url, false);
 }
 
-void MediaList::search(const QString &tag)
+void MediaList::sort(const Vlc::Meta &type)
+{
+
+}
+
+void MediaList::search(const Vlc::Meta &type, const QString &tag)
 {
 
 }

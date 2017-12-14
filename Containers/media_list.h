@@ -3,11 +3,11 @@
 
 #include <QObject>
 
+#include <VLCQtCore/Enums.h>
+
 class MediaListPrivate;
 class MediaSource;
 class VlcInstance;
-
-
 
 class MediaList : public QObject
 {
@@ -22,10 +22,8 @@ public:
 
     MediaSource * getMedia(int) const;
 
-
     void addMediaSource(const QString & path);
     void removeMediaSource(const MediaSource * src);
-
 
     Q_INVOKABLE void openLocalFile(const QString & path);
     Q_INVOKABLE void openUrl(const QString& url);
@@ -35,8 +33,9 @@ public:
     Q_INVOKABLE void search(const Vlc::Meta & type, const QString & tag);
 
 signals:
-    void reloaded();
 
+    void reloaded();
+    void added(MediaSource *);
 
 public slots:
 
