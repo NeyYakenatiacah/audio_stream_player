@@ -14,6 +14,7 @@ public:
     virtual ~MediaListPrivate();
 
     void openMedia(const QString & location, bool isLocalFile);
+    void openMedia(MediaSource * src);
 
     QList<MediaSource *>::const_iterator begin() const;
     QList<MediaSource *>::const_iterator end()   const;
