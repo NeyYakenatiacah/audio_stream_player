@@ -3,8 +3,6 @@
 
 #include <QObject>
 
-class MediaList;
-
 class MediaListManager : public QObject
 {
     Q_OBJECT
@@ -14,10 +12,6 @@ public:
 signals:
 
 public slots:
-
-private:
-
-    QList<MediaList *> m_playlists;
 };
 
 #endif // MEDIA_LIST_MANAGER_H

@@ -75,7 +75,7 @@ int MediaList::count() const
 
 MediaSource *MediaList::source(int idx) const
 {
-    return m_sources.at(idx)
+    return m_sources.at(idx);
 }
 
 void MediaList::clearSources()
@@ -85,12 +85,17 @@ void MediaList::clearSources()
 
 bool MediaList::saveListAs(const QString &path) const
 {
-    m_data->save(path);
+    return m_data->save(path);
+}
+
+bool MediaList::saveListDefaultLocation() const
+{
+    return m_data->save("");
 }
 
 bool MediaList::loadListFrom(const QString &path)
 {
-    m_data->load(path);
+    return m_data->load(path);
 }
 
 void MediaList::append_source(QQmlListProperty<MediaSource> *list, MediaSource *src)
@@ -111,6 +116,16 @@ MediaSource *MediaList::source_at(QQmlListProperty<MediaSource> *list, int idx)
 void MediaList::clear_sources(QQmlListProperty<MediaSource> *list)
 {
     qobject_cast<MediaList *>(list->object)->clearSources();
+}
+
+QString MediaList::name() const
+{
+    return m_name;
+}
+
+void MediaList::setName(const QString &name)
+{
+    m_name = name;
 }
 
 

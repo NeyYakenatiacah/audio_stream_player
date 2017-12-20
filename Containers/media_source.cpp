@@ -49,6 +49,11 @@ const QJsonObject MediaSource::toJson() const
     return obj;
 }
 
+void MediaSource::select() const
+{
+
+}
+
 // Properties
 
 QString MediaSource::title() const

@@ -55,7 +55,8 @@ HEADERS += \
     Containers/Filters/filter_manager.h \
     Containers/Filters/filter_sequence.h \
     Containers/Filters/ifilter.h \
-    Containers/Filters/impl/title_filter.h
+    Containers/Filters/impl/title_filter.h \
+    media_list_manager.h
 
 SOURCES += main.cpp \
     media_controller.cpp \
@@ -66,4 +67,5 @@ SOURCES += main.cpp \
     Containers/Data/media_list_private.cpp \
     Containers/Filters/filter_manager.cpp \
     Containers/Filters/filter_sequence.cpp \
-    Containers/Filters/impl/title_filter.cpp
+    Containers/Filters/impl/title_filter.cpp \
+    media_list_manager.cpp

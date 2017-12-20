@@ -14,7 +14,9 @@ class VlcInstance;
 class MediaList : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QQmlListProperty<MediaSource> sources READ sources)
+
 public:
     explicit MediaList(VlcInstance * instance);
     explicit MediaList(const QString & path, VlcInstance * instance);
@@ -41,17 +43,21 @@ public:
     MediaSource * source(int idx) const;
     void clearSources();
 
+    QString name() const;
+    void setName(const QString &name);
+
 signals:
 
     void reloaded();
     void added(MediaSource *);
-
-public slots:
+    void nameChanged();
 
 private:
 
     //bool saveBufferList(path);
+//! Filesystem interactions
     bool saveListAs(const QString & path) const;
+    bool saveListDefaultLocation() const;
     bool loadListFrom(const QString & path);
 
 //!  Source list interactions for QML
@@ -61,8 +67,8 @@ private:
     static void          clear_sources (QQmlListProperty<MediaSource> * list);
 
     VlcInstance * m_instance;
-    //MediaSource * selectedMedia;
-    //QList<MediaSource *> m_buffer;
+
+    QString m_name;
 
     FilterManager * m_filterManager;
 

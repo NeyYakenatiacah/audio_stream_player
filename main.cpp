@@ -18,8 +18,9 @@ int main(int argc, char *argv[])
     VlcCommon::setPluginPath(app.applicationDirPath() + "/plugins");
 
     qmlRegisterType<MediaController>("asp.MediaController", 0, 2, "MediaController");
-    qmlRegisterType<MediaList>("asp.MediaList", 1, 0, "MediaList");
-    qmlRegisterType<MediaSource>("asp.MediaSource", 1, 0, "MediaSource");
+    qmlRegisterUncreatableType<MediaList>("asp.MediaList", 1, 0, "MediaList", "This type requires initialization");
+    //qmlRegisterType<MediaSource>("asp.MediaSource", 1, 0, "MediaSource");
+    qmlRegisterUncreatableType<MediaSource>("asp.MediaSource", 1, 0, "MediaSource", "This type requires initialization");
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

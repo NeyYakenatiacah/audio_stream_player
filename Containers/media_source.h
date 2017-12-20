@@ -8,13 +8,13 @@ class VlcMetaManager;
 class MediaSource : public VlcMedia
 {
     Q_OBJECT
-/*
+
     Q_PROPERTY(QString artwork     READ artwork     NOTIFY artworkChanged )
     Q_PROPERTY(QString trackID     READ trackID     NOTIFY trackIDChanged )
     Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged  )
     Q_PROPERTY(QString setting     READ setting     NOTIFY settingChanged )
     Q_PROPERTY(QString url         READ url         NOTIFY urlChanged     )
-
+/*
     Q_PROPERTY(QString title       READ title       WRITE setTitle       NOTIFY positionChanged    ) //!
     Q_PROPERTY(QString artist      READ artist      WRITE setArtist      NOTIFY artistChanged      ) //!
     Q_PROPERTY(QString genre       READ genre       WRITE setGenre       NOTIFY genreChanged       ) //!
@@ -37,6 +37,10 @@ public:
     static MediaSource * fromJson(const QJsonObject & json, VlcInstance * instance);
 
     const QJsonObject toJson() const;
+
+    //!
+
+    Q_INVOKABLE void select() const;
 
     // Properties
 
