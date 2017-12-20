@@ -4,20 +4,39 @@
 #include <QObject>
 
 class MediaList;
+class VlcInstance;
 
 class MediaListManager : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(MediaList* currentList READ currentList NOTIFY currentListChanged)
+
 public:
-    explicit MediaListManager(QObject *parent = nullptr);
+    explicit MediaListManager(VlcInstance * instance);
+
+    QStringList names() const;
+
+    Q_INVOKABLE void select(const QString & name);
+
+    Q_INVOKABLE void createList (const QString & name);
+    Q_INVOKABLE void loadList   (const QString & path);
+
+    MediaList * currentList() const;
 
 signals:
 
-public slots:
+    void currentListChanged();
+
 
 private:
 
+    void select(MediaList * list);
+
+    VlcInstance * m_instance;
+
+    MediaList * m_selectedList;
     QList<MediaList *> m_playlists;
+
 };
 
 #endif // MEDIA_LIST_MANAGER_H

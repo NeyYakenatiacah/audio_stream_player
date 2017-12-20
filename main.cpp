@@ -4,9 +4,10 @@
 #include <VLCQtCore/Common.h>
 
 #include "media_controller.h"
+#include "media_list_manager.h"
 #include "Containers/media_list.h"
 #include "Containers/media_source.h"
-#include <QDebug>
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -17,10 +18,13 @@ int main(int argc, char *argv[])
 
     VlcCommon::setPluginPath(app.applicationDirPath() + "/plugins");
 
+//! Init type system
     qmlRegisterType<MediaController>("asp.MediaController", 0, 2, "MediaController");
-    qmlRegisterUncreatableType<MediaList>("asp.MediaList", 1, 0, "MediaList", "This type requires initialization");
-    //qmlRegisterType<MediaSource>("asp.MediaSource", 1, 0, "MediaSource");
-    qmlRegisterUncreatableType<MediaSource>("asp.MediaSource", 1, 0, "MediaSource", "This type requires initialization");
+
+    qmlRegisterUncreatableType<MediaListManager> ("asp.MediaListManager", 1, 0, "MediaListManager", "This type requires initialization");
+    qmlRegisterUncreatableType<MediaList>        ("asp.MediaList",        1, 0, "MediaList",        "This type requires initialization");
+    qmlRegisterUncreatableType<MediaSource>      ("asp.MediaSource",      1, 0, "MediaSource",      "This type requires initialization");
+//!
 
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

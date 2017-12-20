@@ -18,7 +18,7 @@ class MediaList : public QObject
     Q_PROPERTY(QQmlListProperty<MediaSource> sources READ sources)
 
 public:
-    explicit MediaList(VlcInstance * instance);
+    explicit MediaList(VlcInstance * instance, const QString & name);
     explicit MediaList(const QString & path, VlcInstance * instance);
     virtual ~MediaList();
 

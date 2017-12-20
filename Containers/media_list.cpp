@@ -8,11 +8,11 @@
 
 #include <QVariant>
 
-MediaList::MediaList(VlcInstance *instance)
+MediaList::MediaList(VlcInstance *instance, const QString &name)
     : QObject(instance)
 {
     m_data = new MediaListPrivate(instance);
-
+    m_name = name;
 }
 
 MediaList::MediaList(const QString &path, VlcInstance *instance)
@@ -20,6 +20,10 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
 {
     //m_instance = instance;
     m_data = new MediaListPrivate(instance);
+
+    m_data->load(path);
+
+    //m_name = m_data->name();
 }
 
 MediaList::~MediaList()
