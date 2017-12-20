@@ -10,6 +10,7 @@ class MediaListManager : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(MediaList* currentList READ currentList NOTIFY currentListChanged)
+    Q_PROPERTY(QStringList names READ names NOTIFY namesChanged)
 
 public:
     explicit MediaListManager(VlcInstance * instance);
@@ -26,7 +27,7 @@ public:
 signals:
 
     void currentListChanged();
-
+    void namesChanged();
 
 private:
 

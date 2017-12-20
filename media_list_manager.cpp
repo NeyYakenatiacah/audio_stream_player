@@ -34,6 +34,7 @@ void MediaListManager::createList(const QString &name)
     MediaList * list = new MediaList(m_instance, name);
     m_playlists.append(list);
 
+    emit namesChanged();
     select(list);
 }
 
@@ -42,6 +43,7 @@ void MediaListManager::loadList(const QString &path)
     MediaList * list = new MediaList(path, m_instance);
     m_playlists.append(list);
 
+    emit namesChanged();
     select(list);
 }
 
