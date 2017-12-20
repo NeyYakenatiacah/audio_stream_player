@@ -3,7 +3,10 @@
 #include <VLCQtCore/Instance.h>
 
 #include "Data/media_list_private.h"
+#include "Filters/filter_manager.h"
 #include "media_source.h"
+
+#include <QVariant>
 
 MediaList::MediaList(VlcInstance *instance)
     : QObject(instance)
@@ -47,7 +50,7 @@ void MediaList::sort(const Vlc::Meta &type)
 
 void MediaList::search(const Vlc::Meta &type, const QString &tag)
 {
-
+   m_filterManager->append(type, QVariant(tag));
 }
 
 bool MediaList::saveListAs(const QString &path) const

@@ -6,7 +6,8 @@
 class TitleFilter : public IFilter
 {
 public:
-    TitleFilter(const QString & sub_string);
+    explicit TitleFilter(const QString & sub_string);
+    virtual ~TitleFilter();
 
     // IFilter interface
     virtual bool operator ()(const MediaSource *src) const override;

@@ -60,8 +60,10 @@ void FilterManager::append(const Vlc::Meta &tag, const QVariant &value)
                 break;
             }
         }
-
-        m_filters.append(new TitleFilter(value.toString()));
+        else
+        {
+            m_filters.append(new TitleFilter(value.toString()));
+        }
     }
     break;
 
@@ -83,25 +85,23 @@ QStringList FilterManager::availableFilters() const
 
 QList<MediaSource *> FilterManager::filter(QList<MediaSource *> src)
 {
-//    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced(src, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
-//    {
-//        dst.append(src);
-//    });
+    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced<QList<MediaSource *>>
+        (src, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
+    {
+        dst.append(src);
+    });
 
-//    return dst_list.result();
-    QList<MediaSource*> list;
-    return list;
+    return dst_list.result();
 }
 
 QList<MediaSource *> FilterManager::filter(const QList<MediaSource *>::const_iterator &begin,
                                            const QList<MediaSource *>::const_iterator &end)
 {
-    //    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced(begin, end, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
-    //    {
-    //        dst.append(src);
-    //    });
+    QFuture<QList<MediaSource *>> dst_list = QtConcurrent::filteredReduced<QList<MediaSource *>>
+        (begin, end, FilterSequence(m_filters), [this](QList<MediaSource *> & dst, MediaSource * src)
+    {
+            dst.append(src);
+    });
 
-    //    return dst_list.result();
-    QList<MediaSource*> list;
-    return list;
+    return dst_list.result();
 }

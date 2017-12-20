@@ -22,7 +22,7 @@ CONFIG(release, debug|release) {
 }
 
 
-QT += qml quick widgets
+QT += qml quick widgets concurrent
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS

@@ -5,6 +5,7 @@
 
 #include <VLCQtCore/Enums.h>
 
+class FilterManager;
 class MediaListPrivate;
 class MediaSource;
 class VlcInstance;
@@ -48,6 +49,8 @@ private:
     VlcInstance * m_instance;
     //MediaSource * selectedMedia;
     //QList<MediaSource *> m_buffer;
+
+    FilterManager * m_filterManager;
 
     MediaListPrivate * m_data;
     QList<MediaSource *> m_sources;
