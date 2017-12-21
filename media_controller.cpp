@@ -5,10 +5,15 @@
 #include <VLCQtCore/Instance.h>
 #include <VLCQtCore/Media.h>
 #include <VLCQtCore/MediaPlayer.h>
-
+#include <QApplication>
+#include <QDebug>
 MediaController::MediaController(QObject *parent) : QObject(parent)
 {
+    qDebug() << "MC";
+    qDebug() << QApplication::applicationDirPath();
+    VlcCommon::setPluginPath(QApplication::applicationDirPath() + "/plugins");
     m_instance = new VlcInstance (VlcCommon::args(), this);
+    qDebug() << "MC~1";
     m_player   = new VlcMediaPlayer (m_instance);
 
     connect(m_player, &VlcMediaPlayer::stopped,             this, &MediaController::stopped);

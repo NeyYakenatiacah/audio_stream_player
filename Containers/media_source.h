@@ -14,8 +14,8 @@ class MediaSource : public VlcMedia
     Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged  )
     Q_PROPERTY(QString setting     READ setting     NOTIFY settingChanged )
     Q_PROPERTY(QString url         READ url         NOTIFY urlChanged     )
-/*
-    Q_PROPERTY(QString title       READ title       WRITE setTitle       NOTIFY positionChanged    ) //!
+
+    Q_PROPERTY(QString title       READ title       WRITE setTitle       NOTIFY titleChanged       ) //!
     Q_PROPERTY(QString artist      READ artist      WRITE setArtist      NOTIFY artistChanged      ) //!
     Q_PROPERTY(QString genre       READ genre       WRITE setGenre       NOTIFY genreChanged       ) //!
     Q_PROPERTY(QString copyright   READ copyright   WRITE setCopyright   NOTIFY copyrightChanged   )
@@ -26,8 +26,7 @@ class MediaSource : public VlcMedia
     Q_PROPERTY(QString encoder     READ encoder     WRITE setEncoder     NOTIFY encoderChanged     ) // ????
     Q_PROPERTY(  int   trackNumber READ trackNumber WRITE setTrackNumber NOTIFY trackNumberChanged )
     Q_PROPERTY(  int   year        READ year        WRITE setYear        NOTIFY yearChanged        )    // ??
-*/
-    Q_ENUM(Vlc::Meta)
+
 
 public:
     explicit MediaSource(const QString & location, bool localFile, VlcInstance * instance);

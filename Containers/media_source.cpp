@@ -1,5 +1,6 @@
 #include "media_source.h"
 #include <QJsonObject>
+#include <QVariant>
 //#include <VLCQtCore/Media.h>
 #include <VLCQtCore/MetaManager.h>
 

@@ -3,131 +3,169 @@ import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 
 Rectangle {
-    id: rectangle
-    width: 400
-    height: 200
+    id: playerView
 
-    Dial {
-        id: volume_dial
+    anchors.fill: parent
+    anchors.margins: 3
 
-        width: 64
-        height: 64
+    color: "#b2ea81"
+
+
+    DisplayView {
+        id: dView
+        height: 80
+
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
+    }
+
+
+    Row {
+        id: row
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
+
+        spacing: 5
+
+        anchors.top: dView.bottom
+        anchors.topMargin: 0
 
         anchors.right: parent.right
-        anchors.rightMargin: 8
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 8
-
-        value: 40
-        to: 100
-    }
-
-    Dial {
-        id: pb_rate_dial
-
         anchors.left: parent.left
-        anchors.leftMargin: 8
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 8
 
-        width: 64
-        height: 64
+        onWidthChanged: {
+            if(row.width < (row.height - 6) * 6) {
 
-        value: 1.0
-        from: 0.0
-        to: 2.0
-    }
+                var bSize = row.width / 6 - 6
 
-    Rectangle {
-        id: rectangle1
+                volume_dial.width  = bSize
+                volume_dial.height = bSize
 
-        anchors.right: volume_dial.left
-        anchors.rightMargin: 10
-        anchors.left: pb_rate_dial.right
-        anchors.leftMargin: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 8
+                pb_rate_dial.width  = bSize
+                pb_rate_dial.height = bSize
 
-        height: 64
+                play_btn.width  = bSize
+                play_btn.height = bSize
+                stop_btn.width  = bSize
+                stop_btn.height = bSize
 
-        Row {
-            id: row
+                forward_btn.width  = bSize
+                forward_btn.height = bSize
+                backward_btn.width  = bSize
+                backward_btn.height = bSize
 
-            spacing: 5
+            } else {
 
-            anchors.right: parent.right
-            anchors.rightMargin: 3
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            anchors.top: parent.top
+                volume_dial.width  = row.height - 6
+                volume_dial.height = row.height - 6
+
+                pb_rate_dial.width  = row.height - 6
+                pb_rate_dial.height = row.height - 6
+
+                play_btn.width  = row.height - 6
+                play_btn.height = row.height - 6
+                stop_btn.width  = row.height - 6
+                stop_btn.height = row.height - 6
+
+                forward_btn.width  = row.height - 6
+                forward_btn.height = row.height - 6
+                backward_btn.width  = row.height - 6
+                backward_btn.height = row.height - 6
+            }
+        }
+
+        Dial {
+            id: volume_dial
+
+            width: parent.height - 6
+            height: width
+
             anchors.leftMargin: 3
+            anchors.rightMargin: 3
             anchors.bottomMargin: 3
             anchors.topMargin: 3
 
-            RoundButton {
-                id: backward_btn
+            value: 40
+            to: 100
 
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                anchors.bottomMargin: 3
-                anchors.topMargin: 3
+        }
 
-                width: parent.height - 6
-                height: width
+        RoundButton {
+            id: backward_btn
+
+            anchors.leftMargin: 3
+            anchors.rightMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
+
+            width: parent.height - 6
+            height: width
 
 
-            }
+        }
 
-            RoundButton {
-                id: play_btn
+        RoundButton {
+            id: play_btn
 
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                anchors.bottomMargin: 3
-                anchors.topMargin: 3
+            anchors.leftMargin: 3
+            anchors.rightMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
 
-                width: parent.height - 6
-                height: width
+            width: parent.height - 6
+            height: width
 
-                onClicked: mainwindow.keyPressed(qsTr("play"))
-            }
+            onClicked: mainwindow.keyPressed(qsTr("play"))
+        }
 
-            RoundButton {
-                id: stop_btn
+        RoundButton {
+            id: stop_btn
 
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                anchors.bottomMargin: 3
-                anchors.topMargin: 3
+            anchors.leftMargin: 3
+            anchors.rightMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
 
-                width: parent.height - 6
-                height: width
+            width: parent.height - 6
+            height: width
 
-                onClicked: mainwindow.keyPressed(qsTr("stop"))
-            }
+            onClicked: mainwindow.keyPressed(qsTr("stop"))
+        }
 
-            RoundButton {
-                id: forward_btn
+        RoundButton {
+            id: forward_btn
 
-                anchors.leftMargin: 3
-                anchors.rightMargin: 3
-                anchors.bottomMargin: 3
-                anchors.topMargin: 3
+            anchors.leftMargin: 3
+            anchors.rightMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
 
-                width: parent.height - 6
-                height: width
+            width: parent.height - 6
+            height: width
 
-                onClicked: mainwindow.keyPressed(qsTr("forward"))
-            }
+            onClicked: mainwindow.keyPressed(qsTr("forward"))
+        }
+
+        Dial {
+            id: pb_rate_dial
+
+            anchors.leftMargin: 3
+            anchors.rightMargin: 3
+            anchors.bottomMargin: 3
+            anchors.topMargin: 3
+
+            width: parent.height - 6
+            height: width
+
+            value: 1.0
+            from: 0.0
+            to: 2.0
         }
     }
 
-    Column {
-        id: column
-        x: 8
-        y: 8
-        width: 384
-        height: 114
-    }
+
+
+
 
 }

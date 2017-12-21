@@ -4,34 +4,63 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Window 2.3
 
 //import asp.MediaController 1.0
-//import "content"
+import "content"
 
 ApplicationWindow {
     id: mainwindow
-
     visible: true
 
     Material.theme:  Material.Dark
     Material.accent: Material.Purple
 
-    minimumWidth: 240
+    minimumWidth: 180
     minimumHeight: 320
 
-    title: qsTr("ASP 0.1.3 beta")
+    title: qsTr("ASP 0.0.1 beta")
 
-    header: {
+    header: Text {
+        height: parent.height / 10
+        text: qsTr("Header")
+
 
     }
 
-    footer: {
+    footer: Item {
+        id: iFooter
 
+        width: parent.width
+        height: parent.height / 10 > 40 ? 40 : parent.height / 10
+
+        Rectangle {
+            id: playlist_footer
+            color: "#e42424"
+            visible: true
+
+
+            anchors.fill: iFooter
+        }
+
+        function setPlaylistMode () {
+            playlist_footer.visible = true
+        }
+
+        function setDefaultMode () {
+
+        }
     }
-/*
+
+    Drawer {
+        id: drawer
+        width: 0.5 * mainwindow.width
+        height: mainwindow.height
+    }
+
+
     PlayerView {
         id: pl_view
 
     }
-
+/*
     MediaController {
         id: controller
 
