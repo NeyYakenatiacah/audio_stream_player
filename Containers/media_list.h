@@ -52,6 +52,8 @@ signals:
     void added(MediaSource *);
     void nameChanged();
 
+    void indexChanged();
+
 private:
 
     //bool saveBufferList(path);

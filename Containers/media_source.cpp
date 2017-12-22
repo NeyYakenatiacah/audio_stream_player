@@ -147,12 +147,6 @@ QString MediaSource::setting() const
     return m_metaManager->setting();
 }
 
-void MediaSource::setSetting(const QString &setting)
-{
-    //m_metaManager->set
-    //m_setting = setting;
-}
-
 QString MediaSource::url() const
 {
     return m_metaManager->url();

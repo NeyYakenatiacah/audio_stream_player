@@ -70,7 +70,6 @@ public:
     void setYear(int year);
 
     QString setting() const;
-    void setSetting(const QString &setting);
 
     QString url() const;
 

@@ -3,9 +3,10 @@
 
 #include <QObject>
 
+class MediaList;
+class MediaSource;
 class VlcEqualizer;
 class VlcInstance;
-class VlcMedia;
 class VlcMediaPlayer;
 
 class MediaController : public QObject
@@ -15,6 +16,7 @@ class MediaController : public QObject
     Q_PROPERTY (float playbackRate READ playbackRate WRITE setPlaybackRate NOTIFY playbackRateChanged)
     Q_PROPERTY (float position     READ position     WRITE setPosition     NOTIFY positionChanged)
     Q_PROPERTY (int   volume       READ volume       WRITE setVolume       NOTIFY volumeChanged)
+    Q_PROPERTY (MediaSource *media READ media        WRITE setMedia        NOTIFY mediaChanged)
 
 public:
     explicit MediaController(VlcInstance *instance, QObject *parent = nullptr);
@@ -30,17 +32,19 @@ public:
     float playbackRate() const;
     void setPlaybackRate(float playbackRate);
 
-    float position() const;
-    void setPosition(float position);
+    float position () const;
+    void setPosition (float position);
 
-    int volume() const;
-    void setVolume(int value);
+    int volume () const;
+    void setVolume (int value);
 
-    bool autoPlayMode() const;
-    void setAutoPlayMode(bool value);
+    bool autoPlayMode () const;
+    void setAutoPlayMode (bool value);
 
-    VlcMedia *media() const;
-    void setMedia(VlcMedia *media);
+    MediaSource *media () const;
+    void setMedia (MediaSource *media);
+
+    void setMediaList(MediaList *list);
 
     const VlcInstance * instance() const;
 
@@ -79,6 +83,9 @@ private:
 
     VlcMediaPlayer * m_player;
     VlcInstance * m_instance;
+
+    MediaList * m_list;
+    QList<QMetaObject::Connection> m_listConnections;
 };
 
 #endif // MEDIA_CONTROLLER_H

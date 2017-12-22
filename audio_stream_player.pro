@@ -5,9 +5,9 @@ isEmpty(LIBVLC) {
    warning("You have to set LIBVLC_PATH variable!")
 }
 
-isEmpty(BOOST) {
+#isEmpty(BOOST) {
    #warning("You have to set BOOST_PATH variable!")
-}
+#}
 
 INCLUDEPATH += $$LIBVLC/include
 

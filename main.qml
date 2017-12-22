@@ -1,4 +1,4 @@
-import QtQuick 2.9
+import QtQuick 2.10
 import QtQuick.Controls 2.3
 import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
@@ -66,54 +66,6 @@ ApplicationWindow {
     PlayerView {
         id: pl_view
 
-    }
-/*
-    MediaController {
-        id: controller
-
-        playbackRate: 1.0
-        position: 0
-
-        onPlaybackRateChanged: {
-
-        }
-
-        onStateChanged: {
-
-        }
-
-
-    }
-*/
-    function keyPressed(key_id) {
-        if (key_id === "play") {
-            controller.play()
-        }
-        else if (key_id === "stop") {
-            controller.stop()
-        }
-        else if (key_id === "forward") {
-            controller.toForward()
-        }
-        else if (key_id === "backward") {
-            controller.toBackward()
-        }
-    }
-
-    function playbackRate() {
-        return controller.playbackRate()
-    }
-
-    function position() {
-        return controller.position()
-    }
-
-    function setPosition(pos) {
-        controller.position = pos
-    }
-
-    function setPlaybackRate(rate) {
-        controller.playbackRate = rate
     }
 
 }
