@@ -1,5 +1,6 @@
 #include "media_controller.h"
 
+#include <VLCQtCore/Audio.h>
 #include <VLCQtCore/Common.h>
 #include <VLCQtCore/Equalizer.h>
 #include <VLCQtCore/Instance.h>
@@ -7,13 +8,12 @@
 #include <VLCQtCore/MediaPlayer.h>
 #include <QApplication>
 #include <QDebug>
-MediaController::MediaController(QObject *parent) : QObject(parent)
+
+MediaController::MediaController(VlcInstance * instance, QObject *parent) : QObject(parent)
 {
-    qDebug() << "MC";
-    qDebug() << QApplication::applicationDirPath();
-    VlcCommon::setPluginPath(QApplication::applicationDirPath() + "/plugins");
-    m_instance = new VlcInstance (VlcCommon::args(), this);
-    qDebug() << "MC~1";
+    //m_instance = new VlcInstance (VlcCommon::args(), this);
+    m_instance = instance;
+
     m_player   = new VlcMediaPlayer (m_instance);
 
     connect(m_player, &VlcMediaPlayer::stopped,             this, &MediaController::stopped);
@@ -30,37 +30,44 @@ MediaController::MediaController(QObject *parent) : QObject(parent)
 
     connect(m_player, &VlcMediaPlayer::backward,            this, &MediaController::backward);
     connect(m_player, &VlcMediaPlayer::forward,             this, &MediaController::forward);
+
     //connect(m_player, &VlcMediaPlayer::mediaChanged,        this, &MediaController::mediaChanged);
     connect(m_player, &VlcMediaPlayer::end,                 this, &MediaController::end);
 }
 
 void MediaController::play()
 {
+    qDebug() << "Controller::play()";
     m_player->play();
 }
 
 void MediaController::pause()
 {
+    qDebug() << "Controller::pause()";
     m_player->pause();
 }
 
 void MediaController::stop()
 {
+    qDebug() << "Controller::stop()";
     m_player->stop();
 }
 
 void MediaController::resume()
 {
+    qDebug() << "Controller::resume()";
     m_player->resume();
 }
 
 void MediaController::toForward()
 {
+    qDebug() << "Controller::toForward()";
     emit forward();
 }
 
 void MediaController::toBackward()
 {
+    qDebug() << "Controller::toBackward()";
     emit backward();
 }
 
@@ -72,6 +79,7 @@ float MediaController::playbackRate() const
 void MediaController::setPlaybackRate(float playbackRate)
 {
     m_player->setPlaybackRate(playbackRate);
+
     emit playbackRateChanged(playbackRate);
 }
 
@@ -80,11 +88,21 @@ float MediaController::position() const
     return m_player->position();
 }
 
-void MediaController::setPosition(float postition)
+void MediaController::setPosition(float position)
 {
-    m_player->setPosition(postition);
+    m_player->setPosition(position);
     
     emit positionChanged(m_player->position());
+}
+
+int MediaController::volume() const
+{
+    return m_player->audio()->volume();
+}
+
+void MediaController::setVolume(int value)
+{
+    m_player->audio()->setVolume(value);
 }
 
 bool MediaController::autoPlayMode() const
@@ -92,9 +110,9 @@ bool MediaController::autoPlayMode() const
     return m_autoPlayMode;
 }
 
-void MediaController::setAutoPlayMode(bool autoPlayMode)
+void MediaController::setAutoPlayMode(bool value)
 {
-    m_autoPlayMode = autoPlayMode;
+    m_autoPlayMode = value;
 }
 
 VlcMedia *MediaController::media() const
@@ -112,4 +130,9 @@ void MediaController::setMedia(VlcMedia *media)
     {
         m_player->openOnly(media);
     }
+}
+
+const VlcInstance *MediaController::instance() const
+{
+    return m_instance;
 }

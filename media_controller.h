@@ -11,11 +11,13 @@ class VlcMediaPlayer;
 class MediaController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(float position READ position WRITE setPosition NOTIFY positionChanged)
-    Q_PROPERTY(float playbackRate READ playbackRate WRITE setPlaybackRate NOTIFY playbackRateChanged)
+
+    Q_PROPERTY (float playbackRate READ playbackRate WRITE setPlaybackRate NOTIFY playbackRateChanged)
+    Q_PROPERTY (float position     READ position     WRITE setPosition     NOTIFY positionChanged)
+    Q_PROPERTY (int   volume       READ volume       WRITE setVolume       NOTIFY volumeChanged)
 
 public:
-    explicit MediaController(QObject *parent = nullptr);
+    explicit MediaController(VlcInstance *instance, QObject *parent = nullptr);
 
     Q_INVOKABLE void play ();
     Q_INVOKABLE void pause ();
@@ -25,18 +27,22 @@ public:
     Q_INVOKABLE void toForward();
     Q_INVOKABLE void toBackward();
 
-
     float playbackRate() const;
     void setPlaybackRate(float playbackRate);
 
     float position() const;
     void setPosition(float position);
 
+    int volume() const;
+    void setVolume(int value);
+
     bool autoPlayMode() const;
-    void setAutoPlayMode(bool autoPlayMode);
+    void setAutoPlayMode(bool value);
 
     VlcMedia *media() const;
     void setMedia(VlcMedia *media);
+
+    const VlcInstance * instance() const;
 
 signals:
 
@@ -54,14 +60,16 @@ signals:
     void playing ();
     void end ();
 
-    void positionChanged(float pos);
-    void playbackRateChanged(float rate);
+    void positionChanged (float pos);
+    void playbackRateChanged (float rate);
+
+    void volumeChanged (int);
 
     void voutAvailable (int count);
 
     void stateChanged ();
 
-    void error();
+    void error ();
 
 public slots:
 

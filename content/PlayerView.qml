@@ -89,6 +89,7 @@ Rectangle {
             value: 40
             to: 100
 
+            onMoved: controller.volume = volume_dial.value
         }
 
         RoundButton {
@@ -102,7 +103,7 @@ Rectangle {
             width: parent.height - 6
             height: width
 
-
+            onClicked: controller.toBackward()
         }
 
         RoundButton {
@@ -116,7 +117,7 @@ Rectangle {
             width: parent.height - 6
             height: width
 
-            onClicked: mainwindow.keyPressed(qsTr("play"))
+            onClicked: controller.play()
         }
 
         RoundButton {
@@ -130,7 +131,7 @@ Rectangle {
             width: parent.height - 6
             height: width
 
-            onClicked: mainwindow.keyPressed(qsTr("stop"))
+            onClicked: controller.stop()
         }
 
         RoundButton {
@@ -144,7 +145,7 @@ Rectangle {
             width: parent.height - 6
             height: width
 
-            onClicked: mainwindow.keyPressed(qsTr("forward"))
+            onClicked: controller.toForward()
         }
 
         Dial {
@@ -161,6 +162,8 @@ Rectangle {
             value: 1.0
             from: 0.0
             to: 2.0
+
+            onMoved: controller.playbackRate = pb_rate_dial.value
         }
     }
 

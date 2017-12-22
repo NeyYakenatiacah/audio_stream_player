@@ -1,6 +1,6 @@
 import QtQuick 2.9
-import QtQuick.Controls 2.2
-import QtQuick.Controls.Material 2.2
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
 
 //import asp.MediaController 1.0
@@ -9,6 +9,12 @@ import "content"
 ApplicationWindow {
     id: mainwindow
     visible: true
+    //flags: Qt.FramelessWindowHint
+
+    readonly property int dpi: Screen.pixelDensity * 25.4
+    function dp(x) {
+        return (dpi < 120) ? x : x*(dpi/160);
+    }
 
     Material.theme:  Material.Dark
     Material.accent: Material.Purple
@@ -19,7 +25,8 @@ ApplicationWindow {
     title: qsTr("ASP 0.0.1 beta")
 
     header: Text {
-        height: parent.height / 10
+
+        height: dp(48)
         text: qsTr("Header")
 
 
@@ -29,7 +36,7 @@ ApplicationWindow {
         id: iFooter
 
         width: parent.width
-        height: parent.height / 10 > 40 ? 40 : parent.height / 10
+        height: dp(32)
 
         Rectangle {
             id: playlist_footer
@@ -77,7 +84,7 @@ ApplicationWindow {
 
 
     }
-
+*/
     function keyPressed(key_id) {
         if (key_id === "play") {
             controller.play()
@@ -86,10 +93,10 @@ ApplicationWindow {
             controller.stop()
         }
         else if (key_id === "forward") {
-            //controller.forward()
+            controller.toForward()
         }
         else if (key_id === "backward") {
-            //controller.backward()
+            controller.toBackward()
         }
     }
 
@@ -108,5 +115,5 @@ ApplicationWindow {
     function setPlaybackRate(rate) {
         controller.playbackRate = rate
     }
-*/
+
 }
