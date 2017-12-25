@@ -5,7 +5,8 @@ import QtQuick.Controls.Material 2.2
 Rectangle {
     id: playerView
 
-    anchors.fill: parent
+    width: 360
+    height: 150
     anchors.margins: 3
 
     color: "#b2ea81"

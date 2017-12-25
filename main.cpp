@@ -31,8 +31,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    engine.rootContext()->setContextProperty("controller", &controller);
-    engine.rootContext()->setContextProperty("manager", &pl_manager);
+    engine.rootContext()->setContextProperty("controller",    &controller);
+    engine.rootContext()->setContextProperty("media_manager", &pl_manager);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

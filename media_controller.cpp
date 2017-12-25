@@ -35,14 +35,15 @@ MediaController::MediaController(VlcInstance * instance, QObject *parent) : QObj
     connect(m_player, &VlcMediaPlayer::backward,        this, &MediaController::backward);
     connect(m_player, &VlcMediaPlayer::forward,         this, &MediaController::forward);
 
-    //connect(m_player, &VlcMediaPlayer::mediaChanged,        this, &MediaController::mediaChanged);
+    //connect(m_player, &VlcMediaPlayer::mediaChanged,    this, &MediaController::mediaChanged);
     connect(m_player, &VlcMediaPlayer::end,             this, &MediaController::end);
 }
 
 void MediaController::play()
 {
     qDebug() << "Controller::play()";
-    m_player->play();
+    m_player->open(new VlcMedia("http://rock00128.streamr.ru", false, m_instance));
+    //m_player->play();
 }
 
 void MediaController::pause()

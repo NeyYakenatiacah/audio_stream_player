@@ -63,9 +63,15 @@ ApplicationWindow {
     }
 
 
-    PlayerView {
-        id: pl_view
+//    PlayerView {
+//        id: pl_view
 
+//    }
+
+    PlaylistView {
+        id: pls_view
+
+        anchors.fill: parent
     }
 
 }
