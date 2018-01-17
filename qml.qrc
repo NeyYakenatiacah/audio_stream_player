@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>content/MediaSourceView.qml</file>
+        <file>content/EqualizerPad.qml</file>
+        <file>content/PlayerView.qml</file>
+        <file>content/DisplayView.qml</file>
+        <file>content/PlaylistView.qml</file>
+        <file>content/footer/PlaylistFooter.qml</file>
+        <file>content/footer/DefaultFooter.qml</file>
+        <file>content/header/DefaultHeader.qml</file>
     </qresource>
 </RCC>

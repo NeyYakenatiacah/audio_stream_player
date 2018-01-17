@@ -1,125 +1,140 @@
-#include "settings.h"
+﻿#include "settings.h"
 
-#include <algorithm>
-
+#include <QApplication>
 #include <QFile>
-#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QStyle>
+
+#include <QDebug>
+
+QJsonObject toJson (const QColor & color)
+{
+    QJsonObject obj;
+
+    obj["red"]   = color.red();
+    obj["green"] = color.green();
+    obj["blue"]  = color.blue();
+    obj["alpha"] = color.alpha();
+
+    return obj;
+}
+
+QJsonObject toJson (const QPalette & palette)
+{
+    QJsonObject obj;
+
+    obj["Window"]        = toJson(palette.color(QPalette::Window));
+    obj["Background"]    = toJson(palette.color(QPalette::Background));
+    obj["WindowText"]    = toJson(palette.color(QPalette::WindowText));
+    obj["Foreground"]    = toJson(palette.color(QPalette::Foreground));
+    obj["Base"]          = toJson(palette.color(QPalette::Base));
+    obj["AlternateBase"] = toJson(palette.color(QPalette::AlternateBase));
+    obj["ToolTipBase"]   = toJson(palette.color(QPalette::ToolTipBase));
+    obj["ToolTipText"]   = toJson(palette.color(QPalette::ToolTipText));
+    obj["Text"]          = toJson(palette.color(QPalette::Text));
+    obj["Button"]        = toJson(palette.color(QPalette::Button));
+    obj["ButtonText"]    = toJson(palette.color(QPalette::ButtonText));
+    obj["BrightText"]    = toJson(palette.color(QPalette::BrightText));
+
+    return obj;
+}
+
+QColor colorFromJson(const QJsonObject & obj)
+{
+    QColor color;
+
+    if (obj.contains("red"))   color.setRed   (obj["red"].toInt());
+    if (obj.contains("green")) color.setGreen (obj["green"].toInt());
+    if (obj.contains("blue"))  color.setBlue  (obj["blue"].toInt());
+    if (obj.contains("alpha")) color.setAlpha (obj["alpha"].toInt());
+
+    return color;
+}
+
+QPalette fromJson(const QJsonObject & obj)
+{
+    if(!(obj.contains("Background") && obj.contains("Foreground"))) throw ("Bad palette");
+
+    QPalette palette;
+
+    if(obj.contains("Window"))      palette.setColor(QPalette::Window, colorFromJson(obj["Window"].toObject()));
+    if(obj.contains("Background"))  palette.setColor(QPalette::Window, colorFromJson(obj["Background"].toObject()));
+    if(obj.contains("WindowText"))  palette.setColor(QPalette::Window, colorFromJson(obj["WindowText"].toObject()));
+    if(obj.contains("Foreground"))  palette.setColor(QPalette::Window, colorFromJson(obj["Foreground"].toObject()));
+    if(obj.contains("Base"))        palette.setColor(QPalette::Window, colorFromJson(obj["Base"].toObject()));
+    if(obj.contains("ToolTipBase")) palette.setColor(QPalette::Window, colorFromJson(obj["ToolTipBase"].toObject()));
+    if(obj.contains("ToolTipText")) palette.setColor(QPalette::Window, colorFromJson(obj["ToolTipText"].toObject()));
+    if(obj.contains("Text"))        palette.setColor(QPalette::Window, colorFromJson(obj["Text"].toObject()));
+    if(obj.contains("Button"))      palette.setColor(QPalette::Window, colorFromJson(obj["Button"].toObject()));
+    if(obj.contains("ButtonText"))  palette.setColor(QPalette::Window, colorFromJson(obj["ButtonText"].toObject()));
+    if(obj.contains("BrightText"))  palette.setColor(QPalette::Window, colorFromJson(obj["BrightText"].toObject()));
+
+    return palette;
+}
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
-    if(!loadSettings())
-    {
-        defaultSettings();
-    }
+    if(!load()) defaultSettings();
+    qDebug() << "Settings";
 }
 
 Settings::~Settings()
 {
-    saveSettings();
-    m_srcList.clear();
-}
-
-bool Settings::loadSettings()
-{
-    QFile file(QStringLiteral("settings.rs"));
-
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        return false;
-    }
-
-    QByteArray data = file.readAll();
-
-    QJsonDocument settings_doc(QJsonDocument::fromJson(data));
-
-    QJsonObject settings_obj(settings_doc.object());
-
-    if(settings_obj.contains("autoplay"))
-    {
-        m_autoPlay = settings_obj["autoplay"].toBool();
-    }
-    else
-    {
-        return false;
-    }
-
-    if(settings_obj.contains("src"))
-    {
-        QJsonArray src_array = settings_obj["src"].toArray();
-
-        for(const QJsonValue & val : src_array)
-        {
-            addSource(Source(val.toObject()));
-        }
-    }
-    else
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool Settings::saveSettings() const
-{
-    QJsonArray src_array;
-
-    for(const Source & src : m_srcList)
-    {
-        src_array.push_back(src.toJson());
-    }
-
-    QJsonObject settings_obj;
-
-    settings_obj["autoplay"] = m_autoPlay;
-    settings_obj["src"]      = src_array;
-
-    QFile save_file(QStringLiteral("settings.rs"));
-
-    if(!save_file.open(QIODevice::WriteOnly))
-    {
-        return false;
-    }
-
-    QJsonDocument settings_doc(settings_obj);
-    save_file.write(settings_doc.toJson());
-
-    save_file.close();
-
-    return true;
-}
-
-//Source Settings::selectSource(int idx) const
-//{
-//    Source src("a","b","c");
-
-
-
-
-//}
-
-void Settings::addSource(const Source &src)
-{
-    m_srcList.append(src);
-    //std::sort(m_srcList.begin(), m_srcList.end());
-}
-
-void Settings::addSource(QString name, QString stream, QString tag)
-{
-    this->addSource(Source(name, stream, tag));
+    if (save())
+    qDebug() << "~Settings";
 }
 
 void Settings::defaultSettings()
 {
-    m_autoPlay = false;
+    setPalette(QApplication::style()->standardPalette());
+}
 
-    addSource("Rock 00s", "http://rock00128.streamr.ru", "//radiopleer.com/info/rock00.txt");
-    addSource("Rock 90s", "http://rock90128.streamr.ru", "//radiopleer.com/info/rock90.txt");
-    addSource("Rock 80s", "http://rock80128.streamr.ru", "//radiopleer.com/info/rock80.txt");
-    addSource("Rock 70s", "http://rock70128.streamr.ru", "//radiopleer.com/info/rock70.txt");
-    //addSource("Heavy Rock", "", "");
-    //addSource("", "", "");
-    //addSource("", "", "");
+bool Settings::load()
+{
+    QFile loadFile(QStringLiteral("pls.stg"));
+
+    if(!loadFile.open(QIODevice::ReadOnly)) return false;
+
+    QByteArray data = loadFile.readAll();
+
+    QJsonDocument loadDoc(QJsonDocument::fromBinaryData(data));
+
+    QJsonObject obj(loadDoc.object());
+
+    try
+    {
+        setPalette(fromJson(obj));
+    }
+    catch(...)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool Settings::save()
+{
+    QFile saveFile(QStringLiteral("pls.stg"));
+
+    if(!saveFile.open(QIODevice::WriteOnly)) return false;
+
+    QJsonDocument saveDoc(toJson(m_palette));
+
+    saveFile.write(saveDoc.toBinaryData());
+
+    return true;
+}
+
+QPalette Settings::palette() const
+{
+    return m_palette;
+}
+
+void Settings::setPalette(const QPalette &palette)
+{
+    m_palette = palette;
+
+    emit paletteChanged();
 }
