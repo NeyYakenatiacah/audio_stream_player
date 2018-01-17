@@ -13,6 +13,7 @@ QJsonObject & toJson (const QColor & color)
     obj["red"]   = color.red();
     obj["green"] = color.green();
     obj["blue"]  = color.blue();
+    obj["alpha"] = color.alpha();
 
     return obj;
 }
@@ -39,7 +40,14 @@ QJsonObject & toJson (const QPalette & palette)
 
 QColor & colorFromJson(const QJsonObject & obj)
 {
-    return QColor();
+    QColor color;
+
+    if (obj.contains("red"))   color.setRed   (obj["red"]);
+    if (obj.contains("green")) color.setGreen (obj["green"]);
+    if (obj.contains("blue"))  color.setBlue  (obj["blue"]);
+    if (obj.contains("alpha")) color.setAlpha (obj["alpha"]);
+
+    return color;
 }
 
 QPalette & fromJson(const QJsonObject & obj)
