@@ -9,5 +9,8 @@
         <file>content/footer/PlaylistFooter.qml</file>
         <file>content/footer/DefaultFooter.qml</file>
         <file>content/header/DefaultHeader.qml</file>
+        <file>content/buttons/PlButton.qml</file>
+        <file>content/images/play.png</file>
+        <file>content/buttons/images/play.png</file>
     </qresource>
 </RCC>
