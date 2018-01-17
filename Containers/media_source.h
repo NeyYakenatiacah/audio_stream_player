@@ -9,11 +9,12 @@ class MediaSource : public VlcMedia
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString artwork     READ artwork     NOTIFY artworkChanged )
-    Q_PROPERTY(QString trackID     READ trackID     NOTIFY trackIDChanged )
-    Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged  )
-    Q_PROPERTY(QString setting     READ setting     NOTIFY settingChanged )
-    Q_PROPERTY(QString url         READ url         NOTIFY urlChanged     )
+    Q_PROPERTY(qint64  duration    READ duration    NOTIFY durationChanged )
+    Q_PROPERTY(QString artwork     READ artwork     NOTIFY artworkChanged  )
+    Q_PROPERTY(QString trackID     READ trackID     NOTIFY trackIDChanged  )
+    Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged   )
+    Q_PROPERTY(QString setting     READ setting     NOTIFY settingChanged  )
+    Q_PROPERTY(QString url         READ url         NOTIFY urlChanged      )
 
     Q_PROPERTY(QString title       READ title       WRITE setTitle       NOTIFY titleChanged       ) //!
     Q_PROPERTY(QString artist      READ artist      WRITE setArtist      NOTIFY artistChanged      ) //!
@@ -87,6 +88,8 @@ public:
     QString trackID() const;
 
 signals:
+
+    void durationChanged();
     void titleChanged();
     void artistChanged();
     void genreChanged();

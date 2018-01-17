@@ -1,4 +1,4 @@
-#include "media_list_manager.h"
+﻿#include "media_list_manager.h"
 
 #include <VLCQtCore/Instance.h>
 
@@ -29,6 +29,13 @@ void MediaListManager::select(const QString & name)
     }
 }
 
+void MediaListManager::createList()
+{
+    static int counter;
+    createList(QString("Playlist #%1").arg(++counter));
+
+}
+
 void MediaListManager::createList(const QString &name)
 {
     MediaList * list = new MediaList(m_instance, name);
@@ -50,6 +57,19 @@ void MediaListManager::loadList(const QString &path)
 MediaList *MediaListManager::currentList() const
 {
     return m_selectedList;
+}
+
+void MediaListManager::rename(int idx, const QString & name)
+{
+    m_playlists.at(idx)->setName(name);
+}
+
+void MediaListManager::rename(const QString &old_name, const QString &new_name)
+{
+    for(MediaList * list : m_playlists)
+    {
+        if(list->name() == old_name) list->setName(new_name);
+    }
 }
 
 void MediaListManager::select(MediaList *list)

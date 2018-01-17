@@ -15,8 +15,4 @@ ListView {
     orientation: Qt.Vertical
     verticalLayoutDirection: ListView.TopToBottom
 
-    Component {
-        id: media_delegate
-
-    }
 }

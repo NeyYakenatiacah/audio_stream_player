@@ -1,4 +1,4 @@
-#ifndef MEDIALIST_H
+﻿#ifndef MEDIALIST_H
 #define MEDIALIST_H
 
 #include <QObject>

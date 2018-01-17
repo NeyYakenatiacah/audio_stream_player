@@ -1,40 +1,37 @@
-#ifndef SETTINGS_H
+﻿#ifndef SETTINGS_H
 #define SETTINGS_H
 
 #include <QObject>
-
-#include "source.h"
+#include <QPalette>
 
 class Settings : public QObject
 {
     Q_OBJECT
 
-public:
+    Q_PROPERTY(QPalette palette READ palette WRITE setPalette NOTIFY paletteChanged)
 
+public:
     explicit Settings(QObject *parent = nullptr);
     virtual ~Settings();
 
-    bool loadSettings();
-    bool saveSettings() const;
+    Q_INVOKABLE void defaultSettings();
 
-    //Q_INVOKABLE Source selectSource(int idx) const;
-    //Q_INVOKABLE void setSource(int idx);
 
-    void addSource(const Source & src);
-    void addSource(QString name, QString stream, QString tag);
+
+    QPalette palette() const;
+    void setPalette(const QPalette &palette);
 
 signals:
-    void sourceChanged();
-
-public slots:
+    void paletteChanged();
 
 private:
-    void defaultSettings();
 
+    bool load();
+    bool save();
 
-    bool m_autoPlay;
+    QPalette m_palette;
 
-    QList<Source> m_srcList;
+    QStringList m_playlists;
 };
 
 #endif // SETTINGS_H
