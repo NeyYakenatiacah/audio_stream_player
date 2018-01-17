@@ -28,8 +28,6 @@ ApplicationWindow {
 
         height: dp(48)
         text: qsTr("Header")
-
-
     }
 
     footer: Item {
@@ -68,10 +66,10 @@ ApplicationWindow {
 
 //    }
 
-    PlaylistView {
-        id: pls_view
+//    PlaylistView {
+//        id: pls_view
 
-        anchors.fill: parent
-    }
+//        anchors.fill: parent
+//    }
 
 }

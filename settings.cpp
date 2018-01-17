@@ -6,7 +6,9 @@
 #include <QJsonObject>
 #include <QStyle>
 
-QJsonObject & toJson (const QColor & color)
+#include <QDebug>
+
+QJsonObject toJson (const QColor & color)
 {
     QJsonObject obj;
 
@@ -18,7 +20,7 @@ QJsonObject & toJson (const QColor & color)
     return obj;
 }
 
-QJsonObject & toJson (const QPalette & palette)
+QJsonObject toJson (const QPalette & palette)
 {
     QJsonObject obj;
 
@@ -38,31 +40,49 @@ QJsonObject & toJson (const QPalette & palette)
     return obj;
 }
 
-QColor & colorFromJson(const QJsonObject & obj)
+QColor colorFromJson(const QJsonObject & obj)
 {
     QColor color;
 
-    if (obj.contains("red"))   color.setRed   (obj["red"]);
-    if (obj.contains("green")) color.setGreen (obj["green"]);
-    if (obj.contains("blue"))  color.setBlue  (obj["blue"]);
-    if (obj.contains("alpha")) color.setAlpha (obj["alpha"]);
+    if (obj.contains("red"))   color.setRed   (obj["red"].toInt());
+    if (obj.contains("green")) color.setGreen (obj["green"].toInt());
+    if (obj.contains("blue"))  color.setBlue  (obj["blue"].toInt());
+    if (obj.contains("alpha")) color.setAlpha (obj["alpha"].toInt());
 
     return color;
 }
 
-QPalette & fromJson(const QJsonObject & obj)
+QPalette fromJson(const QJsonObject & obj)
 {
-    return QPalette();
+    if(!(obj.contains("Background") && obj.contains("Foreground"))) throw ("Bad palette");
+
+    QPalette palette;
+
+    if(obj.contains("Window"))      palette.setColor(QPalette::Window, colorFromJson(obj["Window"].toObject()));
+    if(obj.contains("Background"))  palette.setColor(QPalette::Window, colorFromJson(obj["Background"].toObject()));
+    if(obj.contains("WindowText"))  palette.setColor(QPalette::Window, colorFromJson(obj["WindowText"].toObject()));
+    if(obj.contains("Foreground"))  palette.setColor(QPalette::Window, colorFromJson(obj["Foreground"].toObject()));
+    if(obj.contains("Base"))        palette.setColor(QPalette::Window, colorFromJson(obj["Base"].toObject()));
+    if(obj.contains("ToolTipBase")) palette.setColor(QPalette::Window, colorFromJson(obj["ToolTipBase"].toObject()));
+    if(obj.contains("ToolTipText")) palette.setColor(QPalette::Window, colorFromJson(obj["ToolTipText"].toObject()));
+    if(obj.contains("Text"))        palette.setColor(QPalette::Window, colorFromJson(obj["Text"].toObject()));
+    if(obj.contains("Button"))      palette.setColor(QPalette::Window, colorFromJson(obj["Button"].toObject()));
+    if(obj.contains("ButtonText"))  palette.setColor(QPalette::Window, colorFromJson(obj["ButtonText"].toObject()));
+    if(obj.contains("BrightText"))  palette.setColor(QPalette::Window, colorFromJson(obj["BrightText"].toObject()));
+
+    return palette;
 }
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
     if(!load()) defaultSettings();
+    qDebug() << "Settings";
 }
 
 Settings::~Settings()
 {
-    save();
+    if (save())
+    qDebug() << "~Settings";
 }
 
 void Settings::defaultSettings()

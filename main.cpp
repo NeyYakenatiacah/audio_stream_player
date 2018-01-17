@@ -26,10 +26,10 @@ int main(int argc, char *argv[])
     MediaListManager pl_manager(&instance);
     Settings settings;
 
-//! Init type system
+////! Init type system
     qmlRegisterUncreatableType<MediaList>   ("asp.MediaList",   1, 0, "MediaList",   "This type requires initialization");
     qmlRegisterUncreatableType<MediaSource> ("asp.MediaSource", 1, 0, "MediaSource", "This type requires initialization");
-//!
+////!
 
     QQmlApplicationEngine engine;
 
