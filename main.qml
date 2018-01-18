@@ -11,6 +11,8 @@ ApplicationWindow {
     visible: true
     //flags: Qt.FramelessWindowHint
 
+    title: settings.palette.name
+
     readonly property int dpi: Screen.pixelDensity * 25.4
     function dp(x) {
         return (dpi < 120) ? x : x*(dpi/160);
@@ -22,7 +24,7 @@ ApplicationWindow {
     minimumWidth: 180
     minimumHeight: 320
 
-    title: qsTr("ASP 0.0.1 beta")
+    //title: qsTr("ASP 0.0.1 beta")
 
     header: Text {
 

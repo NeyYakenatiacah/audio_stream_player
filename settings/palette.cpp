@@ -1,6 +1,7 @@
 ﻿#include "palette.h"
 
 #include <QJsonObject>
+#include <QVariant>
 
 QJsonObject exportColorTo (const QColor & color)
 {
@@ -332,29 +333,29 @@ QJsonObject Palette::toJson() const
 {
     QJsonObject obj;
 
-    obj["name"] = m_name;
+    obj["Name"] = m_name;
 
 
-    obj["WindowText"]      = exportColorTo(windowText());
-    obj["Button"]          = exportColorTo(button());
-    obj["Light"]           = exportColorTo(light());
-    obj["Midlight"]        = exportColorTo(midlight());
-    obj["Dark"]            = exportColorTo(dark());
-    obj["Mid"]             = exportColorTo(mid());
-    obj["Text"]            = exportColorTo(text());
-    obj["BrightText"]      = exportColorTo(brightText());
-    obj["ButtonText"]      = exportColorTo(buttonText());
-    obj["Base"]            = exportColorTo(base());
-    obj["Window"]          = exportColorTo(window());
-    obj["Shadow"]          = exportColorTo(shadow());
-    obj["Highlight"]       = exportColorTo(highlight());
-    obj["HighlightedText"] = exportColorTo(highlightedText());
-    obj["Link"]            = exportColorTo(link());
-    obj["LinkVisited"]     = exportColorTo(linkVisited());
-    obj["AlternateBase"]   = exportColorTo(alternateBase());
-    obj["NoRole"]          = exportColorTo(noRole());
-    obj["ToolTipBase"]     = exportColorTo(tooltipBase());
-    obj["ToolTipText"]     = exportColorTo(tooltipText());
+    obj["WindowText"]      = windowText();
+    obj["Button"]          = button();
+    obj["Light"]           = light();
+    obj["Midlight"]        = midlight();
+    obj["Dark"]            = dark();
+    obj["Mid"]             = mid();
+    obj["Text"]            = text();
+    obj["BrightText"]      = brightText();
+    obj["ButtonText"]      = buttonText();
+    obj["Base"]            = base();
+    obj["Window"]          = window();
+    obj["Shadow"]          = shadow();
+    obj["Highlight"]       = highlight();
+    obj["HighlightedText"] = highlightedText();
+    obj["Link"]            = link();
+    obj["LinkVisited"]     = linkVisited();
+    obj["AlternateBase"]   = alternateBase();
+    obj["NoRole"]          = noRole();
+    obj["ToolTipBase"]     = tooltipBase();
+    obj["ToolTipText"]     = tooltipText();
 
     return obj;
 }
