@@ -49,7 +49,7 @@ void MediaList::openUrl(const QString &url)
 
 void MediaList::sort(const Vlc::Meta &type)
 {
-
+    Q_UNUSED(type)
 }
 
 void MediaList::search(const Vlc::Meta &type, const QString &tag)

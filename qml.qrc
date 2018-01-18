@@ -12,5 +12,6 @@
         <file>content/buttons/PlButton.qml</file>
         <file>content/images/play.png</file>
         <file>content/buttons/images/play.png</file>
+        <file>content/buttons/images/stop.png</file>
     </qresource>
 </RCC>

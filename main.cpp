@@ -24,16 +24,20 @@ int main(int argc, char *argv[])
 
     VlcInstance instance(VlcCommon::args());
 
-    MediaController controller(&instance);
-    MediaListManager pl_manager(&instance);
-    Settings settings;
+
 
 ////! Init type system
     qmlRegisterUncreatableType<MediaList>   ("asp.MediaList",   1, 0, "MediaList",   "This type requires initialization");
     qmlRegisterUncreatableType<MediaSource> ("asp.MediaSource", 1, 0, "MediaSource", "This type requires initialization");
+
+    qmlRegisterType<Palette> ("asp.Palette", 1, 0, "Palette");
 ////!
 
     QQmlApplicationEngine engine;
+
+    MediaController controller(&instance);
+    MediaListManager pl_manager(&instance);
+    Settings settings;
 
     engine.rootContext()->setContextProperty("controller",    &controller);
     engine.rootContext()->setContextProperty("media_manager", &pl_manager);

@@ -2,6 +2,7 @@
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import "buttons"
+
 Rectangle {
     id: playerView
 
@@ -22,44 +23,41 @@ Rectangle {
 //    }
 
 
-//    Row {
-//        id: row
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: 0
+   Row {
+        id: row
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
 
-//        spacing: 5
+        spacing: 5
 
-//        anchors.top: dView.bottom
-//        anchors.topMargin: 0
+        //anchors.top: dView.bottom
+        anchors.top: parent.top
+        anchors.topMargin: 0
 
-//        anchors.right: parent.right
-//        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.left: parent.left
 
-//        PlButton {
-//            id: play_button
-//            image: "images/play"
 
-//            primaryColor: Qt.black
-//            highlightColor: Qt.red
+        PlButton {
+            id: play_button
+            image: "images/play.png"
 
-//            onClicked: controller.play()
-//        }
-
-//    }
-
-    PlButton {
-        id: play_button
-        image: "images/play.png"
-
-        primaryColor: mainwindow.palette.
-        highlightColor: "red"
-
-        onButtonClicked: {
-            console.log(qsTr("cicked"))
-            controller.play()
+            onButtonClicked: {
+                controller.play()
+            }
         }
 
+        PlButton {
+            id: stop_button
+            image: "images/stop.png"
+
+            onButtonClicked: {
+                controller.stop()
+            }
+        }
     }
+
+
 
 
 }

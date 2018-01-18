@@ -2,13 +2,13 @@
 #define SETTINGS_H
 
 #include <QObject>
-#include <QPalette>
+#include <settings/palette.h>
 
 class Settings : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QPalette palette READ palette WRITE setPalette NOTIFY paletteChanged)
+    Q_PROPERTY(Palette * palette READ palette NOTIFY paletteChanged)
 
 public:
     explicit Settings(QObject *parent = nullptr);
@@ -16,8 +16,7 @@ public:
 
     Q_INVOKABLE void defaultSettings();
 
-    QPalette palette() const;
-    void setPalette(const QPalette &palette);
+    Palette * palette();
 
 signals:
     void paletteChanged();
@@ -27,7 +26,7 @@ private:
     bool load();
     bool save();
 
-    QPalette m_palette;
+    Palette * m_palette;
 
     QStringList m_playlists;
 };

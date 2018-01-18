@@ -2,18 +2,6 @@
 
 #include <QJsonObject>
 
-QColor importColorFrom (const QJsonObject & obj)
-{
-    QColor color;
-
-    if (obj.contains("red"))   color.setRed   (obj["red"].toInt());
-    if (obj.contains("green")) color.setGreen (obj["green"].toInt());
-    if (obj.contains("blue"))  color.setBlue  (obj["blue"].toInt());
-    if (obj.contains("alpha")) color.setAlpha (obj["alpha"].toInt());
-
-    return color;
-}
-
 QJsonObject exportColorTo (const QColor & color)
 {
     QJsonObject obj;
@@ -28,9 +16,31 @@ QJsonObject exportColorTo (const QColor & color)
 
 Palette::Palette(QObject *parent) : QObject(parent)
 {
-    m_name = tr("Default theme");
+    defaultPalette();
+}
 
-    //load default
+Palette::Palette(const Palette &other)
+{
+    m_name = other.m_name;
+
+    m_palette = other.m_palette;
+}
+
+void Palette::defaultPalette()
+{
+    setName("Default sheme");
+
+    setWindowText("#9737c6");
+    setWindow    ("#6f7277");
+    setHighlight ("#a8c1ea");
+    setButton    ("#9737c6");
+}
+
+void Palette::operator =(const Palette &other)
+{
+    m_name = other.m_name;
+
+    m_palette = other.m_palette;
 }
 
 QString Palette::name() const
@@ -38,249 +48,249 @@ QString Palette::name() const
     return m_name;
 }
 
-void Palette::setName(const QString &name)
+void Palette::setName(const QString & name)
 {
     m_name = name;
 
     emit nameChanged();
 }
 
-QColor Palette::windowText() const
+QString Palette::windowText() const
 {
-    return m_palette.color(QPalette::WindowText);
+    return m_palette.color(QPalette::WindowText).name();
 }
 
-void Palette::setWindowText(const QColor & color)
+void Palette::setWindowText(const QString & color)
 {
-    m_palette.setColor(QPalette::WindowText, color);
+    m_palette.setColor(QPalette::WindowText, QColor(color));
 
     emit windowTextChanged();
 }
 
-QColor Palette::button() const
+QString Palette::button() const
 {
-    return m_palette.color(QPalette::Button);
+    return m_palette.color(QPalette::Button).name();
 }
 
-void Palette::setButton(const QColor & color)
+void Palette::setButton(const QString & color)
 {
     m_palette.setColor(QPalette::Button, color);
 
     emit buttonChanged();
 }
 
-QColor Palette::light() const
+QString Palette::light() const
 {
-    return m_palette.color(QPalette::Light);
+    return m_palette.color(QPalette::Light).name();
 }
 
-void Palette::setLight(const QColor & color)
+void Palette::setLight(const QString & color)
 {
-    m_palette.setColor(QPalette::Light, color);
+    m_palette.setColor(QPalette::Light, QColor(color));
 
     emit lightChanged();
 }
 
-QColor Palette::midlight() const
+QString Palette::midlight() const
 {
-    return m_palette.color(QPalette::Midlight);
+    return m_palette.color(QPalette::Midlight).name();
 }
 
-void Palette::setMidlight(const QColor & color)
+void Palette::setMidlight(const QString & color)
 {
-    m_palette.setColor(QPalette::Midlight, color);
+    m_palette.setColor(QPalette::Midlight, QColor(color));
 
     emit midlightChanged();
 }
 
-QColor Palette::dark() const
+QString Palette::dark() const
 {
-    return m_palette.color(QPalette::Dark);
+    return m_palette.color(QPalette::Dark).name();
 }
 
-void Palette::setDark(const QColor & color)
+void Palette::setDark(const QString & color)
 {
-    m_palette.setColor(QPalette::Dark, color);
+    m_palette.setColor(QPalette::Dark, QColor(color));
 
     emit darkChanged();
 }
 
-QColor Palette::mid() const
+QString Palette::mid() const
 {
-    return m_palette.color(QPalette::Mid);
+    return m_palette.color(QPalette::Mid).name();
 }
 
-void Palette::setMid(const QColor & color)
+void Palette::setMid(const QString & color)
 {
-    m_palette.setColor(QPalette::Mid, color);
+    m_palette.setColor(QPalette::Mid, QColor(color));
 
     emit midChanged();
 }
 
-QColor Palette::text() const
+QString Palette::text() const
 {
-    return m_palette.color(QPalette::Text);
+    return m_palette.color(QPalette::Text).name();
 }
 
-void Palette::setText(const QColor & color)
+void Palette::setText(const QString & color)
 {
-    m_palette.setColor(QPalette::Text, color);
+    m_palette.setColor(QPalette::Text, QColor(color));
 
     emit textChanged();
 }
 
-QColor Palette::brightText() const
+QString Palette::brightText() const
 {
-    return m_palette.color(QPalette::BrightText);
+    return m_palette.color(QPalette::BrightText).name();
 }
 
-void Palette::setBrightText(const QColor & color)
+void Palette::setBrightText(const QString & color)
 {
-    m_palette.setColor(QPalette::BrightText, color);
+    m_palette.setColor(QPalette::BrightText, QColor(color));
 
     emit brightTextChanged();
 }
 
-QColor Palette::buttonText() const
+QString Palette::buttonText() const
 {
-    return m_palette.color(QPalette::ButtonText);
+    return m_palette.color(QPalette::ButtonText).name();
 }
 
-void Palette::setButtonText(const QColor & color)
+void Palette::setButtonText(const QString & color)
 {
-    m_palette.setColor(QPalette::ButtonText, color);
+    m_palette.setColor(QPalette::ButtonText, QColor(color));
 
     emit buttonTextChanged();
 }
 
-QColor Palette::base() const
+QString Palette::base() const
 {
-    return m_palette.color(QPalette::Base);
+    return m_palette.color(QPalette::Base).name();
 }
 
-void Palette::setBase(const QColor & color)
+void Palette::setBase(const QString & color)
 {
-    m_palette.setColor(QPalette::Base, color);
+    m_palette.setColor(QPalette::Base, QColor(color));
 
     emit baseChanged();
 }
 
-QColor Palette::window() const
+QString Palette::window() const
 {
-    return m_palette.color(QPalette::Window);
+    return m_palette.color(QPalette::Window).name();
 }
 
-void Palette::setWindow(const QColor & color)
+void Palette::setWindow(const QString & color)
 {
-    m_palette.setColor(QPalette::Window, color);
+    m_palette.setColor(QPalette::Window, QColor(color));
 
     emit windowChanged();
 }
 
-QColor Palette::shadow() const
+QString Palette::shadow() const
 {
-    return m_palette.color(QPalette::Shadow);
+    return m_palette.color(QPalette::Shadow).name();
 }
 
-void Palette::setShadow(const QColor & color)
+void Palette::setShadow(const QString & color)
 {
-    m_palette.setColor(QPalette::Shadow, color);
+    m_palette.setColor(QPalette::Shadow, QColor(color));
 
     emit shadowChanged();
 }
 
-QColor Palette::highlight() const
+QString Palette::highlight() const
 {
-    return m_palette.color(QPalette::Highlight);
+    return m_palette.color(QPalette::Highlight).name();
 }
 
-void Palette::setHightlight(const QColor & color)
+void Palette::setHighlight(const QString & color)
 {
-    m_palette.setColor(QPalette::Highlight, color);
+    m_palette.setColor(QPalette::Highlight, QColor(color));
 
     emit highlightChanged();
 }
 
-QColor Palette::highlightedText() const
+QString Palette::highlightedText() const
 {
-    return m_palette.color(QPalette::HighlightedText);
+    return m_palette.color(QPalette::HighlightedText).name();
 }
 
-void Palette::setHighlightedText(const QColor & color)
+void Palette::setHighlightedText(const QString & color)
 {
-    m_palette.setColor(QPalette::HighlightedText, color);
+    m_palette.setColor(QPalette::HighlightedText, QColor(color));
 
     emit highlightedTextChanged();
 }
 
-QColor Palette::link() const
+QString Palette::link() const
 {
-    return m_palette.color(QPalette::Link);
+    return m_palette.color(QPalette::Link).name();
 }
 
-void Palette::setLink(const QColor & color)
+void Palette::setLink(const QString & color)
 {
-    m_palette.setColor(QPalette::Link, color);
+    m_palette.setColor(QPalette::Link, QColor(color));
 
     emit linkChanged();
 }
 
-QColor Palette::linkVisited() const
+QString Palette::linkVisited() const
 {
-    return m_palette.color(QPalette::LinkVisited);
+    return m_palette.color(QPalette::LinkVisited).name();
 }
 
-void Palette::setLinkVisited(const QColor & color)
+void Palette::setLinkVisited(const QString & color)
 {
-    m_palette.setColor(QPalette::LinkVisited, color);
+    m_palette.setColor(QPalette::LinkVisited, QColor(color));
 
     emit linkVisitedChanged();
 }
 
-QColor Palette::alternateBase() const
+QString Palette::alternateBase() const
 {
-    return m_palette.color(QPalette::AlternateBase);
+    return m_palette.color(QPalette::AlternateBase).name();
 }
 
-void Palette::setAlternateBase(const QColor & color)
+void Palette::setAlternateBase(const QString & color)
 {
-    m_palette.setColor(QPalette::AlternateBase, color);
+    m_palette.setColor(QPalette::AlternateBase, QColor(color));
 
     emit alternateBaseChanged();
 }
 
-QColor Palette::noRole() const
+QString Palette::noRole() const
 {
-    return m_palette.color(QPalette::NoRole);
+    return m_palette.color(QPalette::NoRole).name();
 }
 
-void Palette::setNoRole(const QColor & color)
+void Palette::setNoRole(const QString & color)
 {
-    m_palette.setColor(QPalette::NoRole, color);
+    m_palette.setColor(QPalette::NoRole, QColor(color));
 
     emit noRoleChanged();
 }
 
-QColor Palette::tooltipBase() const
+QString Palette::tooltipBase() const
 {
-    return m_palette.color(QPalette::ToolTipBase);
+    return m_palette.color(QPalette::ToolTipBase).name();
 }
 
-void Palette::setTooltipBase(const QColor & color)
+void Palette::setTooltipBase(const QString & color)
 {
-    m_palette.setColor(QPalette::ToolTipBase, color);
+    m_palette.setColor(QPalette::ToolTipBase, QColor(color));
 
     emit tooltipBaseChanged();
 }
 
-QColor Palette::tooltipText() const
+QString Palette::tooltipText() const
 {
-    return m_palette.color(QPalette::ToolTipText);
+    return m_palette.color(QPalette::ToolTipText).name();
 }
 
-void Palette::setTooltipText(const QColor & color)
+void Palette::setTooltipText(const QString &color)
 {
-    m_palette.setColor(QPalette::ToolTipText, color);
+    m_palette.setColor(QPalette::ToolTipText, QColor(color));
 
     emit tooltipTextChanged();
 }
@@ -294,26 +304,26 @@ bool Palette::fromJson(const QJsonObject &obj)
 
     if(obj.contains ("Name")) setName(obj["Name"].toString());
 
-    if(obj.contains ("WindowText"))           setWindowText (importColorFrom (obj["WindowText"].toObject()));
-    if(obj.contains ("Button"))                   setButton (importColorFrom (obj["Button"].toObject()));
-    if(obj.contains ("Light"))                     setLight (importColorFrom (obj["Light"].toObject()));
-    if(obj.contains ("Midlight"))               setMidlight (importColorFrom (obj["Midlight"].toObject()));
-    if(obj.contains ("Dark"))                       setDark (importColorFrom (obj["Dark"].toObject()));
-    if(obj.contains ("Mid"))                         setMid (importColorFrom (obj["Mid"].toObject()));
-    if(obj.contains ("Text"))                       setText (importColorFrom (obj["Text"].toObject()));
-    if(obj.contains ("BrightText"))           setBrightText (importColorFrom (obj["BrightText"].toObject()));
-    if(obj.contains ("ButtonText"))           setButtonText (importColorFrom (obj["ButtonText"].toObject()));
-    if(obj.contains ("Base"))                       setBase (importColorFrom (obj["Base"].toObject()));
-    if(obj.contains ("Window"))                   setWindow (importColorFrom (obj["Window"].toObject()));
-    if(obj.contains ("Shadow"))                   setShadow (importColorFrom (obj["Shadow"].toObject()));
-    if(obj.contains ("Highlight"))            setHightlight (importColorFrom (obj["Highlight"].toObject()));
-    if(obj.contains ("HighlightedText")) setHighlightedText (importColorFrom (obj["HighlightedText"].toObject()));
-    if(obj.contains ("Link"))                       setLink (importColorFrom (obj["Link"].toObject()));
-    if(obj.contains ("LinkVisited"))         setLinkVisited (importColorFrom (obj["LinkVisited"].toObject()));
-    if(obj.contains ("AlternateBase"))     setAlternateBase (importColorFrom (obj["AlternateBase"].toObject()));
-    if(obj.contains ("NoRole"))                   setNoRole (importColorFrom (obj["NoRole"].toObject()));
-    if(obj.contains ("ToolTipBase"))         setTooltipBase (importColorFrom (obj["ToolTipBase"].toObject()));
-    if(obj.contains ("ToolTipText"))         setTooltipText (importColorFrom (obj["ToolTipText"].toObject()));
+    if(obj.contains ("WindowText"))           setWindowText (obj["WindowText"].toString());
+    if(obj.contains ("Button"))                   setButton (obj["Button"].toString());
+    if(obj.contains ("Light"))                     setLight (obj["Light"].toString());
+    if(obj.contains ("Midlight"))               setMidlight (obj["Midlight"].toString());
+    if(obj.contains ("Dark"))                       setDark (obj["Dark"].toString());
+    if(obj.contains ("Mid"))                         setMid (obj["Mid"].toString());
+    if(obj.contains ("Text"))                       setText (obj["Text"].toString());
+    if(obj.contains ("BrightText"))           setBrightText (obj["BrightText"].toString());
+    if(obj.contains ("ButtonText"))           setButtonText (obj["ButtonText"].toString());
+    if(obj.contains ("Base"))                       setBase (obj["Base"].toString());
+    if(obj.contains ("Window"))                   setWindow (obj["Window"].toString());
+    if(obj.contains ("Shadow"))                   setShadow (obj["Shadow"].toString());
+    if(obj.contains ("Highlight"))             setHighlight (obj["Highlight"].toString());
+    if(obj.contains ("HighlightedText")) setHighlightedText (obj["HighlightedText"].toString());
+    if(obj.contains ("Link"))                       setLink (obj["Link"].toString());
+    if(obj.contains ("LinkVisited"))         setLinkVisited (obj["LinkVisited"].toString());
+    if(obj.contains ("AlternateBase"))     setAlternateBase (obj["AlternateBase"].toString());
+    if(obj.contains ("NoRole"))                   setNoRole (obj["NoRole"].toString());
+    if(obj.contains ("ToolTipBase"))         setTooltipBase (obj["ToolTipBase"].toString());
+    if(obj.contains ("ToolTipText"))         setTooltipText (obj["ToolTipText"].toString());
 
     return true;
 }
