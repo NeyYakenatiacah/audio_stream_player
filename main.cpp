@@ -6,7 +6,9 @@
 
 #include "media_controller.h"
 #include "media_list_manager.h"
-#include "settings.h"
+
+#include "settings/settings.h"
+
 #include "Containers/media_list.h"
 #include "Containers/media_source.h"
 

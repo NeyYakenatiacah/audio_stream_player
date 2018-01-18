@@ -16,8 +16,6 @@ public:
 
     Q_INVOKABLE void defaultSettings();
 
-
-
     QPalette palette() const;
     void setPalette(const QPalette &palette);
 

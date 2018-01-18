@@ -75,19 +75,26 @@ QPalette fromJson(const QJsonObject & obj)
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
-    if(!load()) defaultSettings();
+    if(!load())
+    {
+        qDebug() << "Loading complete";
+        defaultSettings();
+    }
     qDebug() << "Settings";
 }
 
 Settings::~Settings()
 {
-    if (save())
+    //if (save())
     qDebug() << "~Settings";
 }
 
 void Settings::defaultSettings()
 {
-    setPalette(QApplication::style()->standardPalette());
+    //(QApplication::style()->standardPalette());
+
+    m_palette.setColor(QPalette::Background, m_palette.dark().color());
+    m_palette.setColor(QPalette::Foreground, QColor(Qt::blue));
 }
 
 bool Settings::load()

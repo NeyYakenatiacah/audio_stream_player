@@ -58,7 +58,8 @@ HEADERS += \
     Containers/Filters/ifilter.h \
     Containers/Filters/impl/title_filter.h \
     media_list_manager.h \
-    settings.h
+    settings/settings.h \
+    settings/palette.h
 
 SOURCES += main.cpp \
     media_controller.cpp \
@@ -70,4 +71,5 @@ SOURCES += main.cpp \
     Containers/Filters/filter_sequence.cpp \
     Containers/Filters/impl/title_filter.cpp \
     media_list_manager.cpp \
-    settings.cpp
+    settings/settings.cpp \
+    settings/palette.cpp

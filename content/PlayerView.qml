@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import "buttons"
@@ -47,18 +47,18 @@ Rectangle {
 
 //    }
 
-
     PlButton {
         id: play_button
         image: "images/play.png"
 
-        primaryColor: Qt.black
-        highlightColor: Qt.red
+        primaryColor: mainwindow.palette.
+        highlightColor: "red"
 
         onButtonClicked: {
             console.log(qsTr("cicked"))
             controller.play()
         }
+
     }
 
 
