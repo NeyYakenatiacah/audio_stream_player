@@ -39,7 +39,7 @@ bool Settings::load()
 
     QByteArray data = loadFile.readAll();
 
-    QJsonDocument loadDoc(QJsonDocument::fromBinaryData(data));
+    QJsonDocument loadDoc(QJsonDocument::fromJson(data));
 
     QJsonObject obj(loadDoc.object());
 
@@ -63,7 +63,7 @@ bool Settings::save()
 
     QJsonDocument saveDoc(m_palette->toJson());
 
-    saveFile.write(saveDoc.toBinaryData());
+    saveFile.write(saveDoc.toJson());
 
     return true;
 }

@@ -1,5 +1,5 @@
 LIBVLC = $$(LIBVLC_PATH)
-BOOST  = $$(BOOST_PATH)
+#BOOST  = $$(BOOST_PATH)
 
 isEmpty(LIBVLC) {
    warning("You have to set LIBVLC_PATH variable!")

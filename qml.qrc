@@ -13,5 +13,10 @@
         <file>content/images/play.png</file>
         <file>content/buttons/images/play.png</file>
         <file>content/buttons/images/stop.png</file>
+        <file>content/buttons/images/ic_fast_forward_white_48pt.png</file>
+        <file>content/buttons/images/ic_fast_rewind_white_48pt.png</file>
+        <file>content/buttons/images/ic_pause_white_48pt.png</file>
+        <file>content/buttons/images/ic_play_arrow_white_48pt.png</file>
+        <file>content/buttons/images/ic_stop_white_48pt.png</file>
     </qresource>
 </RCC>

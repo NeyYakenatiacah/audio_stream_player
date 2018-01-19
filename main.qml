@@ -13,6 +13,8 @@ ApplicationWindow {
 
     title: settings.palette.name
 
+    color: settings.palette.window
+
     readonly property int dpi: Screen.pixelDensity * 25.4
     function dp(x) {
         return (dpi < 120) ? x : x*(dpi/160);
@@ -21,7 +23,7 @@ ApplicationWindow {
     Material.theme:  Material.Dark
     Material.accent: Material.Purple
 
-    minimumWidth: 180
+    minimumWidth: 150
     minimumHeight: 320
 
     //title: qsTr("ASP 0.0.1 beta")

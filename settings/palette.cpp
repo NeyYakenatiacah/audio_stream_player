@@ -32,7 +32,7 @@ void Palette::defaultPalette()
     setName("Default sheme");
 
     setWindowText("#9737c6");
-    setWindow    ("#6f7277");
+    setWindow    ("#2f3237");
     setHighlight ("#a8c1ea");
     setButton    ("#9737c6");
 }
