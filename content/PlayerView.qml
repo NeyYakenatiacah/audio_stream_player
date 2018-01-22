@@ -80,6 +80,14 @@ Rectangle {
 
     Connections {
         target: controller
-        controller.onPlaying:
+        onPlaying: {
+            play_button.image = "images/ic_pause_white_48pt.png"
+        }
+        onPaused: {
+            play_button.image = "images/ic_play_arrow_white_48pt.png"
+        }
+        onStopped: {
+            play_button.image = "images/ic_play_arrow_white_48pt.png"
+        }
     }
 }

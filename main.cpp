@@ -39,6 +39,14 @@ int main(int argc, char *argv[])
     MediaListManager pl_manager(&instance);
     Settings settings;
 
+
+
+    controller.setAutoPlayMode(false);
+
+
+    controller.setMedia(new MediaSource("http://rock00128.streamr.ru", false, &instance));
+
+
     engine.rootContext()->setContextProperty("controller",    &controller);
     engine.rootContext()->setContextProperty("media_manager", &pl_manager);
     engine.rootContext()->setContextProperty("settings",      &settings  );

@@ -1,4 +1,4 @@
-#include "media_controller.h"
+﻿#include "media_controller.h"
 
 #include <VLCQtCore/Audio.h>
 #include <VLCQtCore/Common.h>
@@ -42,8 +42,17 @@ MediaController::MediaController(VlcInstance * instance, QObject *parent) : QObj
 void MediaController::play()
 {
     qDebug() << "Controller::play()";
-    m_player->open(new VlcMedia("http://rock00128.streamr.ru", false, m_instance));
-    //m_player->play();
+
+    if (m_player->state() == Vlc::Playing)
+    {
+        pause();
+    }
+    else
+    {
+        m_player->play();
+    }
+
+//    m_player->open(new VlcMedia("http://rock00128.streamr.ru", false, m_instance));
 }
 
 void MediaController::pause()
