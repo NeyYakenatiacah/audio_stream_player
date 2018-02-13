@@ -8,6 +8,8 @@
 
 #include <QVariant>
 
+#include <QDebug>
+
 MediaList::MediaList(VlcInstance *instance, const QString &name)
     : QObject(instance)
 {
@@ -24,6 +26,7 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
     m_data->load(path);
 
     //m_name = m_data->name();
+    qDebug() << "MediaList";
 }
 
 MediaList::~MediaList()
@@ -35,11 +38,19 @@ MediaList::~MediaList()
 //    m_sources.clear();
 
 //    m_buffer.clear();
+    qDebug() << QString("~MediaList: {size: %1}").arg(m_data->size());
 }
 
 void MediaList::openLocalFile(const QString &path)
 {
+    qDebug() << QString("OpenLocalFile: %1").arg(path);
     m_data->openMedia(path, true);
+}
+
+void MediaList::openLocalFile(const QUrl &path)
+{
+    qDebug() << QString("OpenLocalFileURL: %1").arg(path.fileName());
+    m_data->openMedia(path.fileName(), true);
 }
 
 void MediaList::openUrl(const QString &url)

@@ -10,6 +10,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
+#include <QDebug>
+
 MediaListPrivate::MediaListPrivate(VlcInstance * instance) : QObject(instance)
 {
     m_instance = instance ? instance : new VlcInstance(VlcCommon::args());
@@ -30,9 +32,14 @@ void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
         m_sources.removeAll(source);
     });
 
-    m_sources.append(src);
+    if(src->parsed())
+    {
+        qDebug() << "parsed";
+        qDebug() << src->duration();
+        m_sources.append(src);
 
-    emit added(src);
+        emit added(src);
+    }
 }
 
 void MediaListPrivate::openMedia(MediaSource *src)
@@ -49,6 +56,11 @@ QList<MediaSource *>::const_iterator MediaListPrivate::begin() const
 QList<MediaSource *>::const_iterator MediaListPrivate::end() const
 {
     return m_sources.constEnd();
+}
+
+int MediaListPrivate::size() const
+{
+    return m_sources.size();
 }
 
 bool MediaListPrivate::load(const QString &path)

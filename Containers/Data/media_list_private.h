@@ -19,6 +19,8 @@ public:
     QList<MediaSource *>::const_iterator begin() const;
     QList<MediaSource *>::const_iterator end()   const;
 
+    int size() const;
+
     bool load(const QString & path);
     bool save(const QString & path);
 

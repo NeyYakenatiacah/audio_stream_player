@@ -7,6 +7,7 @@ MediaListManager::MediaListManager(VlcInstance * instance) : QObject(instance)
 {
     m_instance = instance;
     m_selectedList = nullptr;
+    createList();
 }
 
 QStringList MediaListManager::names() const
@@ -25,7 +26,11 @@ void MediaListManager::select(const QString & name)
 {
     for(MediaList * list : m_playlists)
     {
-        if(list->name() == name) select(list);
+        if(list->name() == name)
+        {
+            select(list);
+            emit currentListChanged();
+        }
     }
 }
 
@@ -33,7 +38,6 @@ void MediaListManager::createList()
 {
     static int counter;
     createList(QString("Playlist #%1").arg(++counter));
-
 }
 
 void MediaListManager::createList(const QString &name)

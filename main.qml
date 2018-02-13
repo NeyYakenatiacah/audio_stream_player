@@ -67,14 +67,14 @@ ApplicationWindow {
 
 
     PlayerView {
-        id: pl_view
+        id: player_view
 
     }
 
-//    PlaylistView {
-//        id: pls_view
+    PlaylistManagerView {
+        id: playlist_manager_view
 
-//        anchors.fill: parent
-//    }
+        anchors.fill: parent
+    }
 
 }

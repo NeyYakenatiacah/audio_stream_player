@@ -36,6 +36,9 @@ signals:
 
 private:
 
+    bool load();
+    bool save();
+
     void select(MediaList * list);
 
     VlcInstance * m_instance;

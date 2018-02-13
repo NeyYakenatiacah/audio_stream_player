@@ -31,6 +31,7 @@ public:
     void removeMediaSource(const MediaSource * src);
 
     Q_INVOKABLE void openLocalFile(const QString & path);
+    Q_INVOKABLE void openLocalFile(const QUrl & path);
     Q_INVOKABLE void openUrl(const QString& url);
 
     Q_INVOKABLE void sort(const Vlc::Meta & type);

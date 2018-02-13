@@ -18,5 +18,6 @@
         <file>content/buttons/images/ic_pause_white_48pt.png</file>
         <file>content/buttons/images/ic_play_arrow_white_48pt.png</file>
         <file>content/buttons/images/ic_stop_white_48pt.png</file>
+        <file>content/PlaylistManagerView.qml</file>
     </qresource>
 </RCC>
