@@ -3,6 +3,7 @@
 #include <VLCQtCore/Instance.h>
 
 #include "Containers/media_list.h"
+
 MediaListManager::MediaListManager(VlcInstance * instance) : QObject(instance)
 {
     m_instance = instance;

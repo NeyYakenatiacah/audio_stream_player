@@ -1,23 +1,33 @@
 <RCC>
     <qresource prefix="/">
+
         <file>main.qml</file>
-        <file>content/MediaSourceView.qml</file>
-        <file>content/EqualizerPad.qml</file>
-        <file>content/PlayerView.qml</file>
-        <file>content/DisplayView.qml</file>
-        <file>content/PlaylistView.qml</file>
-        <file>content/footer/PlaylistFooter.qml</file>
-        <file>content/footer/DefaultFooter.qml</file>
-        <file>content/header/DefaultHeader.qml</file>
-        <file>content/buttons/PlButton.qml</file>
-        <file>content/images/play.png</file>
-        <file>content/buttons/images/play.png</file>
-        <file>content/buttons/images/stop.png</file>
-        <file>content/buttons/images/ic_fast_forward_white_48pt.png</file>
-        <file>content/buttons/images/ic_fast_rewind_white_48pt.png</file>
-        <file>content/buttons/images/ic_pause_white_48pt.png</file>
-        <file>content/buttons/images/ic_play_arrow_white_48pt.png</file>
-        <file>content/buttons/images/ic_stop_white_48pt.png</file>
-        <file>content/PlaylistManagerView.qml</file>
+
+        <file>View/Components/buttons/images/ic_fast_forward_white_48pt.png</file>
+        <file>View/Components/buttons/images/ic_fast_rewind_white_48pt.png</file>
+        <file>View/Components/buttons/images/ic_pause_white_48pt.png</file>
+        <file>View/Components/buttons/images/ic_play_arrow_white_48pt.png</file>
+        <file>View/Components/buttons/images/ic_stop_white_48pt.png</file>
+        <file>View/Components/buttons/images/play.png</file>
+        <file>View/Components/buttons/images/stop.png</file>
+        <file>View/Components/buttons/PlButton.qml</file>
+        <file>View/Components/footer/DefaultFooter.qml</file>
+        <file>View/Components/footer/PlaylistFooter.qml</file>
+        <file>View/Components/header/DefaultHeader.qml</file>
+        <file>View/Components/images/play.png</file>
+        <file>View/Components/images/radio.png</file>
+        <file>View/Components/images/stop.png</file>
+
+        <file>View/PlaylistManager/components/PlaylistView.qml</file>
+        <file>View/PlaylistManager/PlaylistManagerView.qml</file>
+
+        <file>View/PlayerView/PlayerView.qml</file>
+        <file>View/PlayerView/components/DisplayView.qml</file>
+        <file>View/PlaylistManager/components/MediaSourceView.qml</file>
+
+        <file>View/EqualizerView/EqualizerPad.qml</file>
+
+        <file>View/Content/ContentManager.qml</file>
+
     </qresource>
 </RCC>

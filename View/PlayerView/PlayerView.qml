@@ -2,7 +2,9 @@
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import QtQuick.Layouts 1.3
-import "buttons"
+
+import "components"
+import "../Components/buttons"
 
 Rectangle {
     id: playerView

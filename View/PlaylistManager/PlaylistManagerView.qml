@@ -4,12 +4,10 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.3
 
+import "components"
+
 ListView {
     id: media_list_manager
-
-    PlayerView {
-        id: media_view
-    }
 
     FileDialog {
         id: file_dialog
@@ -29,11 +27,32 @@ ListView {
         }
     }
 
-    Button {
-        id: open_btn
-        text: qsTr("Single")
-        onClicked: openSingleFile()
+    ListView {
+        id: title_bar
+
+        orientation: Qt.Horizontal
     }
+
+    PlaylistView {
+        id: playlist_view
+
+    }
+
+    Rectangle {
+        id: button_bar
+
+        Grid {
+            id: button_grid
+
+            Button {
+                id: open_btn
+                text: qsTr("Single")
+                onClicked: openSingleFile()
+            }
+        }
+    }
+
+
 
     function openSingleFile() {
         file_dialog.title = qsTr("Open single media file")

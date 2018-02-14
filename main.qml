@@ -4,7 +4,8 @@ import QtQuick.Controls.Material 2.3
 import QtQuick.Window 2.3
 
 //import asp.MediaController 1.0
-import "content"
+import "View/PlaylistManager"
+import "View/PlayerView"
 
 ApplicationWindow {
     id: mainwindow

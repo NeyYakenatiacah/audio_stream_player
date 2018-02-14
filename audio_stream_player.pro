@@ -61,7 +61,7 @@ HEADERS += \
     settings/settings.h \
     settings/palette.h
 
-SOURCES += main.cpp \
+SOURCES += \
     media_controller.cpp \
     Containers/media_source.cpp \
     Containers/media_list.cpp \
@@ -72,4 +72,5 @@ SOURCES += main.cpp \
     Containers/Filters/impl/title_filter.cpp \
     media_list_manager.cpp \
     settings/settings.cpp \
-    settings/palette.cpp
+    settings/palette.cpp \
+    main.cpp
