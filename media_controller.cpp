@@ -85,6 +85,13 @@ void MediaController::toBackward()
     emit backward();
 }
 
+bool MediaController::isPlaying() const
+{
+    if(m_player->state() == Vlc::Playing)
+        return true;
+    return false;
+}
+
 float MediaController::playbackRate() const
 {
     return m_player->playbackRate();

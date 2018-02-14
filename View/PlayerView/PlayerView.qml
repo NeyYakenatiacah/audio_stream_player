@@ -57,7 +57,13 @@ Rectangle {
             image: "images/ic_play_arrow_white_48pt.png"
 
             onButtonClicked: {
-                controller.play()
+
+                if(controller.isPlaying()) {
+                    controller.play()
+                } else {
+                    controller.pause()
+                }
+
             }
         }
 

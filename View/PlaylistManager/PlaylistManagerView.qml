@@ -6,7 +6,7 @@ import QtQuick.Window 2.3
 
 import "components"
 
-ListView {
+Rectangle {
     id: media_list_manager
 
     FileDialog {
@@ -27,19 +27,25 @@ ListView {
         }
     }
 
-    ListView {
-        id: title_bar
+    PlaylistSelector {
+        id: selector
 
-        orientation: Qt.Horizontal
-    }
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.left: parent.left
 
-    PlaylistView {
-        id: playlist_view
-
+        height: 100
     }
 
     Rectangle {
         id: button_bar
+
+        anchors.top: selector.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+
+        height: 100
+        //color: settings.palette.button
 
         Grid {
             id: button_grid
@@ -47,18 +53,32 @@ ListView {
             Button {
                 id: open_btn
                 text: qsTr("Single")
-                onClicked: openSingleFile()
+                onClicked: impl.openSingleFile()
+            }
+
+            Button {
+                id: add_pl
+                text: qsTr("Add list")
+                onClicked: impl.createPlaylist()
             }
         }
     }
 
+    QtObject {
+        id: impl
 
+        function openSingleFile() {
+            file_dialog.title = qsTr("Open single media file")
+            file_dialog.selectMultiple = false
+            file_dialog.selectFolder = false
+            file_dialog.open()
+        }
 
-    function openSingleFile() {
-        file_dialog.title = qsTr("Open single media file")
-        file_dialog.selectMultiple = false
-        file_dialog.selectFolder = false
-        file_dialog.open()
+        function createPlaylist() {
+            media_manager.createList()
+        }
     }
+
+
 
 }

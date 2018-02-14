@@ -43,6 +43,8 @@ void MediaListManager::createList()
 
 void MediaListManager::createList(const QString &name)
 {
+    if(name.isEmpty()) return createList();
+
     MediaList * list = new MediaList(m_instance, name);
     m_playlists.append(list);
 

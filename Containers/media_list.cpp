@@ -31,8 +31,10 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
 
 MediaList::~MediaList()
 {
+    qDebug() << name();
 //    for(MediaSource * src : m_sources)
 //    {
+
 //        delete src;
 //    }
 //    m_sources.clear();

@@ -29,6 +29,8 @@ public:
     Q_INVOKABLE void toForward();
     Q_INVOKABLE void toBackward();
 
+    Q_INVOKABLE bool isPlaying() const; // -> to state
+
     float playbackRate() const;
     void setPlaybackRate(float playbackRate);
 
