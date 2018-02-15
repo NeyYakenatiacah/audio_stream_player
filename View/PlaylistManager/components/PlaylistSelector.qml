@@ -22,15 +22,34 @@ Rectangle {
         delegate: Rectangle {
 
 
-            //height: parent.height
-            color: settings.palette.highlight
+            height: parent.height
+            width: 100
+            color: settings.palette.window
             border.color: settings.palette.highlight
             border.width: 1
 
             Text {
                 id: item_text
+
+                anchors.fill: parent
+
                 color: settings.palette.button
+
                 text: modelData
+            }
+
+            MouseArea {
+                id: item_area
+
+                anchors.fill: parent
+
+                onClicked: {
+
+                }
+
+                onDoubleClicked: {
+
+                }
             }
         }
 

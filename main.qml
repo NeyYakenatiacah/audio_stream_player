@@ -75,7 +75,7 @@ ApplicationWindow {
     PlaylistManagerView {
         id: playlist_manager_view
 
-        width: mainwindow.width
+        anchors.fill: parent
 
     }
 

@@ -34,35 +34,47 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
 
-        height: 100
+        height: 30
     }
 
-    Rectangle {
-        id: button_bar
+    PlaylistControls {
+        id: controls
 
-        anchors.top: selector.bottom
+        anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
 
-        height: 100
+        height: 50
+    }
+
+    /*Rectangle {
+        id: button_bar
+
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        anchors.left: parent.left
+
+        height: 50
         //color: settings.palette.button
 
-        Grid {
-            id: button_grid
 
-            Button {
-                id: open_btn
-                text: qsTr("Single")
-                onClicked: impl.openSingleFile()
-            }
 
-            Button {
-                id: add_pl
-                text: qsTr("Add list")
-                onClicked: impl.createPlaylist()
-            }
-        }
-    }
+//        Grid {
+//            id: button_grid
+
+//            Button {
+//                id: open_btn
+//                text: qsTr("Single")
+//                onClicked: impl.openSingleFile()
+//            }
+
+//            Button {
+//                id: add_pl
+//                text: qsTr("Add list")
+//                onClicked: impl.createPlaylist()
+//            }
+//        }
+    }*/
 
     QtObject {
         id: impl
