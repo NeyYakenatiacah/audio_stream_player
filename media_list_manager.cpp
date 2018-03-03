@@ -3,7 +3,7 @@
 #include <VLCQtCore/Instance.h>
 
 #include "Containers/media_list.h"
-
+#include <QDebug>
 MediaListManager::MediaListManager(VlcInstance * instance) : QObject(instance)
 {
     m_instance = instance;
@@ -25,12 +25,13 @@ QStringList MediaListManager::names() const
 
 void MediaListManager::select(const QString & name)
 {
+    qDebug() << "Trying select " << name;
+
     for(MediaList * list : m_playlists)
     {
         if(list->name() == name)
         {
             select(list);
-            emit currentListChanged();
         }
     }
 }
@@ -81,7 +82,10 @@ void MediaListManager::rename(const QString &old_name, const QString &new_name)
 
 void MediaListManager::select(MediaList *list)
 {
-    m_selectedList = list;
+    if(m_selectedList != list)
+    {
+        m_selectedList = list;
 
-    emit currentListChanged();
+        emit currentListChanged();
+    }
 }

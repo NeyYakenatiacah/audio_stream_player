@@ -22,9 +22,10 @@
         <file>View/PlaylistManager/components/MediaSourceView.qml</file>
         <file>View/EqualizerView/EqualizerPad.qml</file>
         <file>View/Content/ContentManager.qml</file>
-        <file>View/PlaylistManager/components/PlaylistSelector.qml</file>
         <file>View/PlaylistManager/components/PlaylistControls.qml</file>
         <file>View/Components/buttons/images/ic_add_white_48pt.png</file>
         <file>View/Components/buttons/images/ic_remove_white_48pt.png</file>
+        <file>View/PlaylistManager/Selector/PlaylistSelector.qml</file>
+        <file>View/PlaylistManager/Selector/SelectorDelegate.qml</file>
     </qresource>
 </RCC>

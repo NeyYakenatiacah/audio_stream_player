@@ -5,6 +5,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Window 2.3
 
 import "components"
+import "Selector"
 
 Rectangle {
     id: media_list_manager
@@ -33,6 +34,8 @@ Rectangle {
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.left: parent.left
+
+        anchors.margins: 1
 
         height: 30
     }

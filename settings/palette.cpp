@@ -31,10 +31,12 @@ void Palette::defaultPalette()
 {
     setName("Default sheme");
 
-    setWindowText("#9737c6");
-    setWindow    ("#2f3237");
-    setHighlight ("#a8c1ea");
-    setButton    ("#9737c6");
+    setWindowText       ("#9737c6");
+    setWindow           ("#2f3237");
+    setHighlight        ("#a8c1ea");
+    setButton           ("#9737c6");
+    setText             ("#9737c6");
+    setHighlightedText  ("#a8c1ea");
 }
 
 void Palette::operator =(const Palette &other)
