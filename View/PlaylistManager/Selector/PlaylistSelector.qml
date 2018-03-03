@@ -3,6 +3,8 @@ import QtQuick 2.9
 Rectangle {
     id: selector
 
+    color: "transparent"
+
     ListView {
         id: selector_list_view
 

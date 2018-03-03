@@ -74,9 +74,8 @@ ApplicationWindow {
 
     PlaylistManagerView {
         id: playlist_manager_view
-
         anchors.fill: parent
-
+        color: settings.palette.window
     }
 
 }
