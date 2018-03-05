@@ -95,7 +95,7 @@ ItemDelegate {
 
                 elide: Text.ElideMiddle
                 color: delegate.text_color
-                text: duration
+                text: time
 
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment:   Text.AlignVCenter

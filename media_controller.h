@@ -17,6 +17,7 @@ class MediaController : public QObject
     Q_PROPERTY (float position     READ position     WRITE setPosition     NOTIFY positionChanged)
     Q_PROPERTY (int   volume       READ volume       WRITE setVolume       NOTIFY volumeChanged)
     Q_PROPERTY (MediaSource *media READ media        WRITE setMedia        NOTIFY mediaChanged)
+    Q_PROPERTY (bool  autoPlayMode READ autoPlayMode WRITE setAutoPlayMode NOTIFY autoPlayModeChanged)
 
 public:
     explicit MediaController(VlcInstance *instance, QObject *parent = nullptr);
@@ -68,6 +69,7 @@ signals:
 
     void positionChanged (float pos);
     void playbackRateChanged (float rate);
+    void autoPlayModeChanged();
 
     void volumeChanged (int);
 

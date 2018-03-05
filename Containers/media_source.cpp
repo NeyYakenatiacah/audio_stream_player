@@ -1,5 +1,6 @@
 #include "media_source.h"
 #include <QJsonObject>
+#include <QTime>
 #include <QVariant>
 //#include <VLCQtCore/Media.h>
 #include <VLCQtCore/MetaManager.h>
@@ -12,6 +13,8 @@ MediaSource::MediaSource(const QString & location, bool localFile, VlcInstance *
     qDebug() << "MediaSource : " << location;
     m_url = location;
     m_metaManager = new VlcMetaManager(this);
+
+    connect(this, &MediaSource::durationChanged, this, &MediaSource::timeChanged);
 }
 
 MediaSource::MediaSource(const QString & location, VlcInstance * instance)
@@ -20,6 +23,8 @@ MediaSource::MediaSource(const QString & location, VlcInstance * instance)
     qDebug() << "MediaSource : " << location;
     m_url = location;
     m_metaManager = new VlcMetaManager(this);
+
+    connect(this, &MediaSource::durationChanged, this, &MediaSource::timeChanged);
 }
 
 MediaSource::~MediaSource()
@@ -69,6 +74,13 @@ QString MediaSource::format() const
     if(pos != std::string::npos)
         return QString::fromStdString(m_url.toStdString().substr(pos));
     return {};
+}
+
+QString MediaSource::time() const
+{
+    return QTime::fromMSecsSinceStartOfDay(int(duration())).toString("hh:mm:ss");
+//    QTime time(duration());
+//    return time.toString("hh:mm:ss");
 }
 
 // Properties

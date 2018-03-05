@@ -40,15 +40,30 @@ Item {
 
             onClicked: {
                 media_list.currentIndex = index
-            }
-
-            onDoubleClicked: {
-                console.log("dc")
                 controller.setMedia(media_manager.currentList.source(index))
-                //controller.play()
             }
         }
 
+        Connections {
+            target: controller
+
+            onForward: {
+                media_list.currentIndex = media_list.currentIndex + 1
+                controller.setMedia(media_manager.currentList.source(media_list.currentIndex))
+                if(!controller.autoPlayMode) controller.play()
+            }
+
+            onBackward: {
+                media_list.currentIndex = media_list.currentIndex - 1
+                controller.setMedia(media_manager.currentList.source(media_list.currentIndex))
+                if(!controller.autoPlayMode) controller.play()
+            }
+
+            onEnd: {
+                console.log("Ended")
+                controller.toForward()
+            }
+        }
     }
 
     function rebuilt() {

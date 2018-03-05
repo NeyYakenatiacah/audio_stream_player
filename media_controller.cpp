@@ -134,6 +134,8 @@ bool MediaController::autoPlayMode() const
 void MediaController::setAutoPlayMode(bool value)
 {
     m_autoPlayMode = value;
+
+    emit autoPlayModeChanged();
 }
 
 MediaSource *MediaController::media() const

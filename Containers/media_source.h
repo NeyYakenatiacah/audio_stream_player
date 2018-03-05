@@ -10,6 +10,7 @@ class MediaSource : public VlcMedia
     Q_OBJECT
 
     Q_PROPERTY(qint64  duration    READ duration    NOTIFY durationChanged )
+    Q_PROPERTY(QString time        READ time        NOTIFY timeChanged  )
     Q_PROPERTY(QString artwork     READ artwork     NOTIFY artworkChanged  )
     Q_PROPERTY(QString trackID     READ trackID     NOTIFY trackIDChanged  )
     Q_PROPERTY(QString rating      READ rating      NOTIFY ratingChanged   )
@@ -44,6 +45,8 @@ public:
 
     Q_INVOKABLE QString format() const;
     // Properties
+
+    QString time() const;
 
     QString title() const;
     void setTitle(const QString &title);
@@ -108,6 +111,7 @@ signals:
     void artworkChanged();
     void trackIDChanged();
     void nowPlaying();
+    void timeChanged();
 
     void prepareToRemove();
 
