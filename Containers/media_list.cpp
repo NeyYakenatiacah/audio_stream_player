@@ -15,6 +15,13 @@ MediaList::MediaList(VlcInstance *instance, const QString &name)
 {
     m_data = new MediaListPrivate(instance);
     m_name = name;
+
+    connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
+    connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
+    {
+        m_sources.append(src);
+        emit reloaded();
+    });
 }
 
 MediaList::MediaList(const QString &path, VlcInstance *instance)
@@ -25,6 +32,12 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
 
     m_data->load(path);
 
+    connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
+    connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
+    {
+        m_sources.append(src);
+        emit reloaded();
+    });
     //m_name = m_data->name();
     qDebug() << "MediaList";
 }
@@ -46,7 +59,7 @@ MediaList::~MediaList()
 void MediaList::openLocalFile(const QString &path)
 {
     qDebug() << QString("OpenLocalFile: %1").arg(path);
-    m_data->openMedia(path, true);
+    m_data->openMedia(QUrl(path).path(), true);
 }
 
 void MediaList::openLocalFile(const QUrl &path)
@@ -55,9 +68,9 @@ void MediaList::openLocalFile(const QUrl &path)
     m_data->openMedia(path.fileName(), true);
 }
 
-void MediaList::openUrl(const QString &url)
+void MediaList::openUrl(const QUrl &url)
 {
-   m_data->openMedia(url, false);
+    m_data->openMedia(url.fileName(), false);
 }
 
 void MediaList::sort(const Vlc::Meta &type)

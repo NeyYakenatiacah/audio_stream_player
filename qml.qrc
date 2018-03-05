@@ -15,7 +15,6 @@
         <file>View/Components/images/play.png</file>
         <file>View/Components/images/radio.png</file>
         <file>View/Components/images/stop.png</file>
-        <file>View/PlaylistManager/components/PlaylistView.qml</file>
         <file>View/PlaylistManager/PlaylistManagerView.qml</file>
         <file>View/PlayerView/PlayerView.qml</file>
         <file>View/PlayerView/components/DisplayView.qml</file>
@@ -27,5 +26,7 @@
         <file>View/Components/buttons/images/ic_remove_white_48pt.png</file>
         <file>View/PlaylistManager/Selector/PlaylistSelector.qml</file>
         <file>View/PlaylistManager/Selector/SelectorDelegate.qml</file>
+        <file>View/PlaylistManager/View/PlaylistView.qml</file>
+        <file>View/PlaylistManager/View/MediaDelegate.qml</file>
     </qresource>
 </RCC>

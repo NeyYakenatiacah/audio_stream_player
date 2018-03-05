@@ -43,8 +43,8 @@ public:
     bool autoPlayMode () const;
     void setAutoPlayMode (bool value);
 
-    MediaSource *media () const;
-    void setMedia (MediaSource *media);
+    Q_INVOKABLE MediaSource *media () const;
+    Q_INVOKABLE void setMedia (MediaSource *media);
 
     void setMediaList(MediaList *list);
 

@@ -53,9 +53,12 @@ QString Palette::name() const
 
 void Palette::setName(const QString & name)
 {
-    m_name = name;
+    if(m_name != name)
+    {
+        m_name = name;
 
-    emit nameChanged();
+        emit nameChanged();
+    }
 }
 
 QString Palette::windowText() const

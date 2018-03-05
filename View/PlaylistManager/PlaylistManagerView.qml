@@ -6,6 +6,7 @@ import QtQuick.Window 2.3
 
 import "components"
 import "Selector"
+import "View"
 
 Rectangle {
     id: media_list_manager
@@ -40,6 +41,15 @@ Rectangle {
         height: 30
     }
 
+    PlaylistView {
+        id: view
+
+        anchors.top:selector.bottom
+        anchors.bottom: controls.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
+
     PlaylistControls {
         id: controls
 
@@ -47,37 +57,10 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
 
-        height: 50
+        height: 30
     }
 
-    /*Rectangle {
-        id: button_bar
 
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.left: parent.left
-
-        height: 50
-        //color: settings.palette.button
-
-
-
-//        Grid {
-//            id: button_grid
-
-//            Button {
-//                id: open_btn
-//                text: qsTr("Single")
-//                onClicked: impl.openSingleFile()
-//            }
-
-//            Button {
-//                id: add_pl
-//                text: qsTr("Add list")
-//                onClicked: impl.createPlaylist()
-//            }
-//        }
-    }*/
 
     QtObject {
         id: impl

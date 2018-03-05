@@ -4,20 +4,28 @@
 //#include <VLCQtCore/Media.h>
 #include <VLCQtCore/MetaManager.h>
 
+#include <QDebug>
+
 MediaSource::MediaSource(const QString & location, bool localFile, VlcInstance * instance)
     : VlcMedia(location, localFile, instance)
 {
+    qDebug() << "MediaSource : " << location;
+    m_url = location;
     m_metaManager = new VlcMetaManager(this);
 }
 
 MediaSource::MediaSource(const QString & location, VlcInstance * instance)
     : VlcMedia(location, instance)
 {
+    qDebug() << "MediaSource : " << location;
+    m_url = location;
     m_metaManager = new VlcMetaManager(this);
 }
 
 MediaSource::~MediaSource()
 {
+    qDebug() << "~MediaSource : " << m_url;
+
     emit prepareToRemove();
 
     delete m_metaManager;
@@ -53,6 +61,14 @@ const QJsonObject MediaSource::toJson() const
 void MediaSource::select() const
 {
 
+}
+
+QString MediaSource::format() const
+{
+    size_t pos = m_url.toStdString().find('.');
+    if(pos != std::string::npos)
+        return QString::fromStdString(m_url.toStdString().substr(pos));
+    return {};
 }
 
 // Properties

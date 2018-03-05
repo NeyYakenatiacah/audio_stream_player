@@ -143,6 +143,8 @@ MediaSource *MediaController::media() const
 
 void MediaController::setMedia(MediaSource *media)
 {
+    qDebug() << QString("SetMedia for %1").arg(media->title());
+
     if(m_autoPlayMode)
     {
         m_player->open(media);

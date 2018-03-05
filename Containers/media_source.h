@@ -42,6 +42,7 @@ public:
 
     Q_INVOKABLE void select() const;
 
+    Q_INVOKABLE QString format() const;
     // Properties
 
     QString title() const;
@@ -113,6 +114,9 @@ signals:
 public slots:
 
 private:
+
+    QString m_url;
+
     void init();
 
     VlcMetaManager * m_metaManager;

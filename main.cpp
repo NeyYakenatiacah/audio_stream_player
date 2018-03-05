@@ -41,11 +41,11 @@ int main(int argc, char *argv[])
 
 
 
-    controller.setAutoPlayMode(false);
+    controller.setAutoPlayMode(true);
 
 
-    controller.setMedia(new MediaSource("http://rock00128.streamr.ru", false, &instance));
-
+    //controller.setMedia(new MediaSource("D:/Music/Gintama [FLAC]/OP/OP02 - Tooi Nioi/02. Repeat Man.flac", true, &instance));
+    //controller.play();
 
     engine.rootContext()->setContextProperty("controller",    &controller);
     engine.rootContext()->setContextProperty("media_manager", &pl_manager);

@@ -15,7 +15,7 @@ class MediaList : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
-    Q_PROPERTY(QQmlListProperty<MediaSource> sources READ sources)
+    Q_PROPERTY(QQmlListProperty<MediaSource> sources READ sources NOTIFY reloaded)
 
 public:
     explicit MediaList(VlcInstance * instance, const QString & name);
@@ -32,7 +32,7 @@ public:
 
     Q_INVOKABLE void openLocalFile(const QString & path);
     Q_INVOKABLE void openLocalFile(const QUrl & path);
-    Q_INVOKABLE void openUrl(const QString& url);
+    Q_INVOKABLE void openUrl(const QUrl &url);
 
     Q_INVOKABLE void sort(const Vlc::Meta & type);
 
@@ -41,7 +41,7 @@ public:
     QQmlListProperty<MediaSource> sources();
     void appendSource(MediaSource * src);
     int count() const;
-    MediaSource * source(int idx) const;
+    Q_INVOKABLE MediaSource * source(int idx) const;
     void clearSources();
 
     QString name() const;

@@ -20,15 +20,17 @@ MediaListPrivate::MediaListPrivate(VlcInstance * instance) : QObject(instance)
 MediaListPrivate::~MediaListPrivate()
 {
     //if(!this->parent()) delete m_instance;
-
-    for(MediaSource * src : m_sources)
-    {
-        delete src;
-    }
+    qDebug() << "MLP~~";
+//    for(MediaSource * src : m_sources)
+//    {
+//        delete src;
+//    }
 }
 
 void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
 {
+    qDebug() << "MediaListP::openMedia : " << location;
+
     MediaSource * src = new MediaSource(location, isLocalFile, m_instance);
 
     connect(src, &MediaSource::prepareToRemove, this, [this]()
