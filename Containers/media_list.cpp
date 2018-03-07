@@ -1,4 +1,4 @@
-#include "media_list.h"
+﻿#include "media_list.h"
 
 #include <VLCQtCore/Instance.h>
 
@@ -107,7 +107,7 @@ int MediaList::count() const
 MediaSource *MediaList::source(int idx) const
 {
     if(idx < 0) return m_sources.at(0);
-    else if(idx >= m_sources.size()) return m_sources(m_sources.size() - 1);
+    else if(idx >= m_sources.size()) return m_sources.at(m_sources.size() - 1);
     else return m_sources.at(idx);
 }
 

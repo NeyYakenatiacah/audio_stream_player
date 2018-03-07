@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 
@@ -17,108 +17,91 @@ ItemDelegate {
         border.color: "white"
         border.width: 1
 
-        GridLayout {
-            id: grid
+        anchors.fill: delegate
+        anchors.margins: 3
 
-            columnSpacing: 2
-            rowSpacing: 2
+        Text {
+            id: mIdx
 
-            Layout.fillWidth: true
+            anchors.bottom: source_view.bottom
+            anchors.left: source_view.left
+            anchors.top: source_view.top
 
-            Text {
-                id: mIdx
+            width: delegate.width / 10
 
-                Layout.row: 0
-                Layout.column: 0
+            elide: Text.ElideMiddle
+            color: delegate.text_color
+            text: idx
 
-                Layout.rowSpan: 2
-                Layout.columnSpan: 1
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:   Text.AlignVCenter
+        }
 
-                Layout.fillWidth: true
+        Text {
+            id: mArtist
 
-                elide: Text.ElideMiddle
-                color: delegate.text_color
-                text: idx
+            anchors.left: mIdx.right
+            anchors.top: source_view.top
 
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:   Text.AlignVCenter
-            }
+            width: delegate.width * 0.35
+            height: delegate.height * 0.5
 
-            Text {
-                id: mArtist
+            elide: Text.ElideLeft
+            color: delegate.text_color
+            text: artist
 
-                Layout.row: 0
-                Layout.column: 1
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:   Text.AlignVCenter
+        }
 
-                Layout.rowSpan: 1
-                Layout.columnSpan: 2
+        Text {
+            id: mAlbum
 
-                Layout.fillWidth: true
+            anchors.left: mArtist.right
+            anchors.top: source_view.top
 
-                elide: Text.ElideMiddle
-                color: delegate.text_color
-                text: artist
+            width: delegate.width * 0.35
+            height: delegate.height * 0.5
 
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:   Text.AlignVCenter
-            }
+            elide: Text.ElideRight
+            color: delegate.text_color
+            text: album
 
-            Text {
-                id: mTitle
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:   Text.AlignVCenter
+        }
 
-                Layout.row: 0
-                Layout.column: 3
+        Text {
+            id: mDuration
 
-                Layout.rowSpan: 1
-                Layout.columnSpan: 2
+            anchors.left: mAlbum.right
+            anchors.right: source_view.right
+            anchors.top: source_view.top
 
-                Layout.fillWidth: true
+            height: delegate.height * 0.5
 
-                elide: Text.ElideMiddle
-                color: delegate.text_color
-                text: title
+            elide: Text.ElideMiddle
+            color: delegate.text_color
+            text: time
 
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:   Text.AlignVCenter
-            }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:   Text.AlignVCenter
+        }
 
-            Text {
-                id: mDuration
+        Text {
+            id: mTitle
 
-                Layout.row: 0
-                Layout.column: 5
+            anchors.left: mIdx.right
+            anchors.bottom: source_view.bottom
 
-                Layout.rowSpan: 1
-                Layout.columnSpan: 1
+            height: delegate.height * 0.5
 
-                Layout.fillWidth: true
+            elide: Text.ElideLeft
+            color: delegate.text_color
+            text: title
 
-                elide: Text.ElideMiddle
-                color: delegate.text_color
-                text: time
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:   Text.AlignVCenter
-            }
-
-            Text {
-                id: mAlbum
-
-                Layout.row: 1
-                Layout.column: 1
-
-                Layout.rowSpan: 1
-                Layout.columnSpan: 2
-
-                Layout.fillWidth: true
-
-                elide: Text.ElideMiddle
-                color: delegate.text_color
-                text: album
-
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment:   Text.AlignVCenter
-            }
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment:   Text.AlignVCenter
         }
     }
 }

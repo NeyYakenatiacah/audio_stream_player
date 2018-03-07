@@ -1,4 +1,4 @@
-import QtQuick 2.9
+﻿import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Controls.Material 2.2
 import "../components"
@@ -22,11 +22,11 @@ Item {
 
         focus: true
 
-        snapMode: ListView.SnapToItem
-        boundsBehavior: Flickable.StopAtBounds
+        //snapMode: ListView.SnapToItem
+        //boundsBehavior: Flickable.StopAtBounds
         orientation: ListView.Vertical
         //verticalLayoutDirection: ListView.TopToBottom
-        highlightFollowsCurrentItem: true
+        //highlightFollowsCurrentItem: true
 
         model: media_manager.currentList.sources
 
