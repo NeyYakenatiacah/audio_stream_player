@@ -24,6 +24,9 @@ public:
     bool load(const QString & path);
     bool save(const QString & path);
 
+    QString name() const;
+    void setName(const QString &name);
+
 signals:
     void reloaded();
     void added(MediaSource *);
@@ -32,6 +35,7 @@ signals:
 public slots:
 
 private:
+    QString m_name;
     VlcInstance * m_instance;
     QList<MediaSource *> m_sources;
 };

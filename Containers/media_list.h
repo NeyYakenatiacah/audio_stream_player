@@ -22,18 +22,15 @@ public:
     explicit MediaList(const QString & path, VlcInstance * instance);
     virtual ~MediaList();
 
-    MediaSource * getCurrentMedia() const;
-    int           getCurrentMediaIdx() const;
+//    MediaSource * getCurrentMedia() const;
+//    int           getCurrentMediaIdx() const;
 
-    MediaSource * getMedia(int) const;
 
-    void addMediaSource(const QString & path);
-    void removeMediaSource(const MediaSource * src);
 
     Q_INVOKABLE void openLocalFile(const QString & path);
     Q_INVOKABLE void openLocalFile(const QUrl & path);
     Q_INVOKABLE void openUrl(const QUrl &url);
-
+    Q_INVOKABLE void removeMedia(const MediaSource * src);
     Q_INVOKABLE void sort(const Vlc::Meta & type);
 
     Q_INVOKABLE void search(const Vlc::Meta & type, const QString & tag);

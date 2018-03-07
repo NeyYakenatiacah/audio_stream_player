@@ -60,6 +60,9 @@ const QJsonObject MediaSource::toJson() const
 {
     QJsonObject obj;
 
+    obj["url"] = m_url;
+//! other properties
+
     return obj;
 }
 

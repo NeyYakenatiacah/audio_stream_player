@@ -29,30 +29,25 @@ MediaListPrivate::~MediaListPrivate()
 
 void MediaListPrivate::openMedia(const QString &location, bool isLocalFile)
 {
-    qDebug() << "MediaListP::openMedia : " << location;
-
     MediaSource * src = new MediaSource(location, isLocalFile, m_instance);
 
-    connect(src, &MediaSource::prepareToRemove, this, [this]()
-    {
-        MediaSource * source = qobject_cast<MediaSource*>(this->sender());
-        m_sources.removeAll(source);
-    });
-
-    if(src->parsed())
-    {
-        qDebug() << "parsed";
-        qDebug() << src->duration();
-        m_sources.append(src);
-
-        emit added(src);
-    }
+    openMedia(src);
 }
 
 void MediaListPrivate::openMedia(MediaSource *src)
 {
-    m_sources.append(src);
-    emit added(src);
+    if(src->parsed())
+    {
+        m_sources.append(src);
+
+        connect(src, &MediaSource::prepareToRemove, this, [this]()
+        {
+            MediaSource * source = qobject_cast<MediaSource*>(this->sender());
+            m_sources.removeAll(source);
+        });
+
+        emit added(src);
+    }
 }
 
 QList<MediaSource *>::const_iterator MediaListPrivate::begin() const
@@ -94,6 +89,7 @@ bool MediaListPrivate::save(const QString &path)
         }
 
         QJsonObject obj;
+        obj["name"] = m_name;
         obj["list"] = array;
 
         QJsonDocument doc(obj);
@@ -106,4 +102,14 @@ bool MediaListPrivate::save(const QString &path)
     }
 
     return false;
+}
+
+QString MediaListPrivate::name() const
+{
+    return m_name;
+}
+
+void MediaListPrivate::setName(const QString &name)
+{
+    m_name = name;
 }

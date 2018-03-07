@@ -30,7 +30,14 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
     //m_instance = instance;
     m_data = new MediaListPrivate(instance);
 
-    m_data->load(path);
+    if(m_data->load(path))
+    {
+        m_name = m_data->name();
+    }
+    else
+    {
+        m_name = "temp";
+    }
 
     connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
     connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
@@ -38,21 +45,11 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
         m_sources.append(src);
         emit reloaded();
     });
-    //m_name = m_data->name();
-    qDebug() << "MediaList";
 }
 
 MediaList::~MediaList()
 {
     qDebug() << name();
-//    for(MediaSource * src : m_sources)
-//    {
-
-//        delete src;
-//    }
-//    m_sources.clear();
-
-//    m_buffer.clear();
     qDebug() << QString("~MediaList: {size: %1}").arg(m_data->size());
 }
 
@@ -73,6 +70,11 @@ void MediaList::openUrl(const QUrl &url)
     m_data->openMedia(url.fileName(), false);
 }
 
+void MediaList::removeMedia(const MediaSource *src)
+{
+    if(src) delete src;
+}
+
 void MediaList::sort(const Vlc::Meta &type)
 {
     Q_UNUSED(type)
@@ -85,7 +87,6 @@ void MediaList::search(const Vlc::Meta &type, const QString &tag)
 
 QQmlListProperty<MediaSource> MediaList::sources()
 {
-    //return QQmlListProperty<MediaSource>(this, m_sources);
     return QQmlListProperty<MediaSource>(this, this,
                                          &MediaList::append_source,
                                          &MediaList::source_count,
@@ -105,7 +106,9 @@ int MediaList::count() const
 
 MediaSource *MediaList::source(int idx) const
 {
-    return m_sources.at(idx);
+    if(idx < 0) return m_sources.at(0);
+    else if(idx >= m_sources.size()) return m_sources(m_sources.size() - 1);
+    else return m_sources.at(idx);
 }
 
 void MediaList::clearSources()
