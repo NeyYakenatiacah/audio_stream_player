@@ -3,17 +3,22 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 import asp.Palette 1.0
 
-Item {
-    Layout.minimumWidth:  48
-    Layout.minimumHeight: 48
+Rectangle {
 
-    Layout.preferredWidth:  64
-    Layout.preferredHeight: 64
+    color: settings.palette.window
 
-    Layout.maximumWidth: 80
-    Layout.maximumHeight: 80
+    property bool press_fixed: false
+//    Layout.minimumWidth:  48
+//    Layout.minimumHeight: 48
 
-    Layout.fillWidth: true
+//    Layout.preferredWidth:  64
+//    Layout.preferredHeight: 64
+
+//    Layout.maximumWidth: 80
+//    Layout.maximumHeight: 80
+
+//    Layout.fillWidth: true
+//    Layout.fillHeight: true
 
     property color primaryColor:   settings.palette.button
     property color highlightColor: settings.palette.highlight
@@ -42,14 +47,30 @@ Item {
         anchors.fill: parent
 
         onPressed: {
-            overlay.color = highlightColor
-            overlay.update()
-            buttonClicked()
+            if(!press_fixed) {
+                overlay.color = highlightColor
+                overlay.update()
+                buttonClicked()
+            }
         }
 
         onReleased: {
-            overlay.color = primaryColor
+            if(!press_fixed) {
+                overlay.color = primaryColor
+            }
         }
+    }
+
+    function press () {
+        press_fixed = true
+        overlay.color = highlightColor
+        overlay.update()
+    }
+
+    function release () {
+        press_fixed = false
+        overlay.color = primaryColor
+        overlay.update()
     }
 
     function setColor (color) {

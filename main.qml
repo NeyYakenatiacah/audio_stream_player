@@ -39,7 +39,7 @@ ApplicationWindow {
         id: iFooter
 
         width: parent.width
-        height: dp(32)
+        height: 10
 
         Rectangle {
             id: playlist_footer

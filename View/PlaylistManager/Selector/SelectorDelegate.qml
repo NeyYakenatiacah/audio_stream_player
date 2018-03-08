@@ -16,7 +16,7 @@ ItemDelegate {
 
         color: "transparent"
 
-        radius: 3
+        //radius: 3
 
         border.width: 1
         border.color: delegate.color
@@ -39,6 +39,17 @@ ItemDelegate {
 
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment:   Text.AlignVCenter
+        }
+
+        MouseArea {
+            id: area
+            anchors.fill: parent
+            acceptedButtons: Qt.RightButton
+
+            onClicked: {
+                media_manager.rename(modelData, "privet")
+                console.log("right on selectord")
+            }
         }
     }
 }

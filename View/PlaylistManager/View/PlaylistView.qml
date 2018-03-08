@@ -16,7 +16,7 @@ Item {
     ListView {
         id: media_list
 
-        spacing: 2
+        spacing: 1
 
         anchors.fill: parent
 
@@ -34,7 +34,7 @@ Item {
             id: delegate
 
             width: media_list.width
-            height: 50
+            height: 30
 
             text_color: ListView.isCurrentItem ? settings.palette.highlightedText : settings.palette.text
 

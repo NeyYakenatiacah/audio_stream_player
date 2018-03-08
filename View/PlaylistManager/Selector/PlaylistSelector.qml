@@ -3,11 +3,13 @@ import QtQuick 2.9
 Rectangle {
     id: selector
 
-    color: "transparent"
+    z: 1000
+
+
 
     ListView {
         id: selector_list_view
-
+        //z: parent.z
         spacing: 3
 
         anchors.fill: parent
@@ -41,7 +43,8 @@ Rectangle {
     Connections {
         target: media_manager
         onCurrentListChanged: {
-            console.log(media_manager.currentList.name)
+            var idx = media_manager.currentIdx()
+            if(idx !== -1) selector_list_view.currentIndex = idx
         }
     }
 }

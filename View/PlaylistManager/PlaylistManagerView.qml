@@ -38,16 +38,20 @@ Rectangle {
 
         anchors.margins: 1
 
+        color: settings.palette.window
+
         height: 30
     }
 
     PlaylistView {
         id: view
 
-        anchors.top:selector.bottom
+        anchors.top: selector.bottom
         anchors.bottom: controls.top
         anchors.left: parent.left
         anchors.right: parent.right
+
+        anchors.margins: 1
     }
 
     PlaylistControls {
@@ -56,6 +60,8 @@ Rectangle {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
+
+        color: "transparent"
 
         height: 30
     }

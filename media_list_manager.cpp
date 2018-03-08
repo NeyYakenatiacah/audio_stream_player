@@ -67,16 +67,33 @@ MediaList *MediaListManager::currentList() const
     return m_selectedList;
 }
 
+int MediaListManager::currentIdx() const
+{
+    int i = 0;
+    for(const MediaList * list : m_playlists)
+    {
+        if(list == m_selectedList) return i;
+        i++;
+    }
+    return -1;
+}
+
 void MediaListManager::rename(int idx, const QString & name)
 {
     m_playlists.at(idx)->setName(name);
+
+    emit namesChanged();
 }
 
 void MediaListManager::rename(const QString &old_name, const QString &new_name)
 {
     for(MediaList * list : m_playlists)
     {
-        if(list->name() == old_name) list->setName(new_name);
+        if(list->name() == old_name)
+        {
+            list->setName(new_name);
+            emit namesChanged();
+        }
     }
 }
 

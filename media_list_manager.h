@@ -25,6 +25,7 @@ public:
     Q_INVOKABLE void loadList   (const QString & path);
 
     MediaList * currentList() const;
+    Q_INVOKABLE int currentIdx() const;
 
     Q_INVOKABLE void rename(int idx, const QString &name);
     Q_INVOKABLE void rename(const QString & old_name, const QString & new_name);
