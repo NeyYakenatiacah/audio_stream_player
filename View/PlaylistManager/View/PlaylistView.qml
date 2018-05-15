@@ -5,13 +5,13 @@ import "../components"
 Item {
     id: plView
 
-    Rectangle {
-        id: frame
-        anchors.fill: parent
-        radius: 3
-        border.color: settings.palette.button
-        color: "transparent"
-    }
+//    Rectangle {
+//        id: frame
+//        anchors.fill: parent
+//        radius: 3
+//        border.color: settings.palette.button
+//        color: "transparent"
+//    }
 
     ListView {
         id: media_list
@@ -22,8 +22,8 @@ Item {
 
         focus: true
 
-        //snapMode: ListView.SnapToItem
-        //boundsBehavior: Flickable.StopAtBounds
+        snapMode: ListView.SnapToItem
+        boundsBehavior: Flickable.StopAtBounds
         orientation: ListView.Vertical
         //verticalLayoutDirection: ListView.TopToBottom
         //highlightFollowsCurrentItem: true

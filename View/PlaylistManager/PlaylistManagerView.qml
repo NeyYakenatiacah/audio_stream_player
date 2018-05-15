@@ -61,7 +61,7 @@ Rectangle {
         anchors.right: parent.right
         anchors.left: parent.left
 
-        color: "transparent"
+        color: settings.palette.window
 
         height: 30
     }

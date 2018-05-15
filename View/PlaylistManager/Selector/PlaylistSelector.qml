@@ -10,7 +10,7 @@ Rectangle {
     ListView {
         id: selector_list_view
         //z: parent.z
-        spacing: 3
+        //spacing: 1
 
         anchors.fill: parent
 

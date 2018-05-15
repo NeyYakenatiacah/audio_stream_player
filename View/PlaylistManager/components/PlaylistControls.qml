@@ -7,6 +7,7 @@ import "../../Components/buttons"
 Rectangle {
     id: frame
     z: 1000
+
     PlButton {
         id: add_btn
 
@@ -86,7 +87,7 @@ Rectangle {
     FileDialog {
         id: file_dialog
         modality: Qt.WindowModal
-        nameFilters: [ "Audio files (*.mp3 *.flac)", "All files (*)" ]
+        nameFilters: [ "Audio files (*.mp3 *.flac *.m4a)", "Video files (*.mp4)" ]
         selectedNameFilter: "All files (*)"
         sidebarVisible: false
         selectExisting: true

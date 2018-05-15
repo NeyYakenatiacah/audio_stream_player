@@ -12,14 +12,38 @@ ItemDelegate {
     Rectangle {
         id: delegate_frame
 
+        Rectangle {
+            anchors.bottom: delegate_frame.bottom
+            anchors.top: delegate_frame.top
+            anchors.left: delegate_frame.left
+            width: 1
+            color: delegate.color
+        }
+
+        Rectangle {
+            anchors.bottom: delegate_frame.bottom
+            anchors.right: delegate_frame.right
+            anchors.left: delegate_frame.left
+            height: 2
+            color: delegate.color
+        }
+
+        Rectangle {
+            anchors.bottom: delegate_frame.bottom
+            anchors.top: delegate_frame.top
+            anchors.right: delegate_frame.right
+            width: 1
+            color: delegate.color
+        }
+
         anchors.fill: parent
 
         color: "transparent"
 
         //radius: 3
 
-        border.width: 1
-        border.color: delegate.color
+        //border.width: 1
+        //border.color: delegate.color
 
         //visible: false
 
