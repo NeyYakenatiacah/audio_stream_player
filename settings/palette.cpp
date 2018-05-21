@@ -20,7 +20,8 @@ Palette::Palette(QObject *parent) : QObject(parent)
     defaultPalette();
 }
 
-Palette::Palette(const Palette &other)
+Palette::Palette( const Palette &other )
+    : QObject( nullptr )
 {
     m_name = other.m_name;
 

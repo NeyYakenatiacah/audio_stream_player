@@ -9,19 +9,17 @@
 #include <QVariant>
 
 #include <QDebug>
+#include <QJsonArray>
+#include <QJsonObject>
 
 MediaList::MediaList(VlcInstance *instance, const QString &name)
     : QObject(instance)
 {
-    m_data = new MediaListPrivate(instance);
+    qDebug() << "MediaList() " << name;
+    m_data = new MediaListPrivate(name, instance);
     m_name = name;
 
-    connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
-    connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
-    {
-        m_sources.append(src);
-        emit reloaded();
-    });
+    initConnections();
 }
 
 MediaList::MediaList(const QString &path, VlcInstance *instance)
@@ -39,18 +37,31 @@ MediaList::MediaList(const QString &path, VlcInstance *instance)
         m_name = "temp";
     }
 
-    connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
-    connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
-    {
-        m_sources.append(src);
-        emit reloaded();
-    });
+    initConnections();
 }
 
 MediaList::~MediaList()
 {
     qDebug() << name();
-    qDebug() << QString("~MediaList: {size: %1}").arg(m_data->size());
+    qDebug() << QString("~MediaList: {size: %1}{size: %2}").arg(m_data->size()).arg(m_sources.size());
+}
+
+QJsonObject MediaList::saveToJson() const
+{
+    return m_data->jsonExport();
+}
+
+bool MediaList::loadFromJson(const QJsonObject &json)
+{
+    if(m_data->jsonImport(json))
+    {
+
+        m_name = m_data->name();
+        qDebug() << "loaded: " << m_name;
+        return true;
+    }
+
+    return false;
 }
 
 void MediaList::openLocalFile(const QString &path)
@@ -68,11 +79,6 @@ void MediaList::openLocalFile(const QUrl &path)
 void MediaList::openUrl(const QUrl &url)
 {
     m_data->openMedia(url.fileName(), false);
-}
-
-void MediaList::removeMedia(const MediaSource *src)
-{
-    if(src) delete src;
 }
 
 void MediaList::sort(const Vlc::Meta &type)
@@ -96,6 +102,7 @@ QQmlListProperty<MediaSource> MediaList::sources()
 
 void MediaList::appendSource(MediaSource *src)
 {
+    qDebug() << "AppendSource()";
     if(src) m_data->openMedia(src);
 }
 
@@ -109,6 +116,12 @@ MediaSource *MediaList::source(int idx) const
     if(idx < 0) return m_sources.at(0);
     else if(idx >= m_sources.size()) return m_sources.at(m_sources.size() - 1);
     else return m_sources.at(idx);
+}
+
+void MediaList::removeSource(int idx)
+{
+    if(idx >= 0 && idx < m_sources.size())
+        m_data->removeMedia(m_sources.at(idx));
 }
 
 void MediaList::clearSources()
@@ -133,6 +146,7 @@ bool MediaList::loadListFrom(const QString &path)
 
 void MediaList::append_source(QQmlListProperty<MediaSource> *list, MediaSource *src)
 {
+    qDebug() << "append_sources";
     qobject_cast<MediaList *>(list->object)->appendSource(src);
 }
 
@@ -159,6 +173,34 @@ QString MediaList::name() const
 void MediaList::setName(const QString &name)
 {
     m_name = name;
+    m_data->setName(name);
+}
+
+void MediaList::initConnections()
+{
+    connect(m_data, &MediaListPrivate::reloaded, this, &MediaList::reloaded);
+    connect(m_data, &MediaListPrivate::reloaded, this, [this]()
+    {
+        m_sources.clear();
+        for(auto it = m_data->begin(); it != m_data->end(); ++it)
+        {
+            m_sources << *it;
+        }
+    });
+    connect(m_data, &MediaListPrivate::removed, this, [this](MediaSource * src)
+    {
+        for(auto it = m_sources.begin(); it != m_sources.end(); ++it)
+        {
+            if(*it == src) m_sources.erase(it);
+        }
+        emit reloaded();
+    });
+    connect(m_data, &MediaListPrivate::nameChanged, this, &MediaList::nameChanged);
+    connect(m_data, &MediaListPrivate::added, this, [this](MediaSource * src)
+    {
+        m_sources.append(src);
+        emit reloaded();
+    });
 }
 
 

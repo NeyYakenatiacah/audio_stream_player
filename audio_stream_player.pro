@@ -1,24 +1,29 @@
 LIBVLC = $$(LIBVLC_PATH)
+TARGET_OS = $$(OS)
 #BOOST  = $$(BOOST_PATH)
 
 isEmpty(LIBVLC) {
-   warning("You have to set LIBVLC_PATH variable!")
+    isEqual(TARGET_OS, "Windows") {
+        warning("You have to set LIBVLC_PATH variable!")
+    }
 }
 
 #isEmpty(BOOST) {
    #warning("You have to set BOOST_PATH variable!")
 #}
 
+CONFIG += c++17
+
 INCLUDEPATH += $$LIBVLC/include
 
 CONFIG(debug, debug|release) {
     LIBS += -L$$LIBVLC/lib
-    LIBS += -lVLCQtCored
+    LIBS += -lVLCQtCored -lstdc++fs
 }
 
 CONFIG(release, debug|release) {
     LIBS += -L$$LIBVLC/lib
-    LIBS += -lVLCQtCore
+    LIBS += -lVLCQtCore -lstdc++fs
 }
 
 QMAKE_RPATHDIR += @executable_path/../Frameworks

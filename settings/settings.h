@@ -11,12 +11,22 @@ class Settings : public QObject
     Q_PROPERTY(Palette * palette READ palette NOTIFY paletteChanged)
 
 public:
+    enum SaveMode
+    {
+        Binary,
+        Json
+    };
+
     explicit Settings(QObject *parent = nullptr);
     virtual ~Settings();
 
     Q_INVOKABLE void defaultSettings();
 
     Palette * palette();
+
+    SaveMode saveMode() const;
+
+    QString playlistsPath() const;
 
 signals:
     void paletteChanged();
@@ -29,6 +39,8 @@ private:
     Palette * m_palette;
 
     QStringList m_playlists;
+
+    SaveMode m_saveMode;
 };
 
 #endif // SETTINGS_H

@@ -25,12 +25,13 @@ public:
 //    MediaSource * getCurrentMedia() const;
 //    int           getCurrentMediaIdx() const;
 
-
+    QJsonObject saveToJson() const;
+    bool loadFromJson(const QJsonObject & json);
 
     Q_INVOKABLE void openLocalFile(const QString & path);
     Q_INVOKABLE void openLocalFile(const QUrl & path);
     Q_INVOKABLE void openUrl(const QUrl &url);
-    Q_INVOKABLE void removeMedia(const MediaSource * src);
+
     Q_INVOKABLE void sort(const Vlc::Meta & type);
 
     Q_INVOKABLE void search(const Vlc::Meta & type, const QString & tag);
@@ -39,6 +40,7 @@ public:
     void appendSource(MediaSource * src);
     int count() const;
     Q_INVOKABLE MediaSource * source(int idx) const;
+    Q_INVOKABLE void removeSource(int idx);
     void clearSources();
 
     QString name() const;
@@ -53,7 +55,7 @@ signals:
     void indexChanged();
 
 private:
-
+    void initConnections();
     //bool saveBufferList(path);
 //! Filesystem interactions
     bool saveListAs(const QString & path) const;

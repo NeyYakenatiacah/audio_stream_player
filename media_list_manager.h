@@ -3,7 +3,9 @@
 
 #include <QObject>
 
+
 class MediaList;
+class Settings;
 class VlcInstance;
 
 class MediaListManager : public QObject
@@ -14,7 +16,9 @@ class MediaListManager : public QObject
     Q_PROPERTY(QStringList names READ names NOTIFY namesChanged)
 
 public:
-    explicit MediaListManager(VlcInstance * instance);
+
+    MediaListManager(VlcInstance * instance, Settings *settings);
+    virtual ~MediaListManager();
 
     QStringList names() const;
 
@@ -22,6 +26,7 @@ public:
 
     Q_INVOKABLE void createList ();
     Q_INVOKABLE void createList (const QString & name);
+
     Q_INVOKABLE void loadList   (const QString & path);
 
     MediaList * currentList() const;
@@ -37,6 +42,8 @@ signals:
 
 private:
 
+    void createList(MediaList * list);
+
     bool load();
     bool save();
 
@@ -48,6 +55,8 @@ private:
     QList<MediaList *> m_playlists;
 
     static int m_metaCounter;
+
+    Settings * m_settings;
 };
 
 #endif // MEDIA_LIST_MANAGER_H

@@ -10,6 +10,8 @@
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
+    m_saveMode = SaveMode::Json;
+
     m_palette = new Palette(this);
 
     if(!load())
@@ -71,4 +73,14 @@ bool Settings::save()
 Palette *Settings::palette()
 {
     return m_palette;
+}
+
+Settings::SaveMode Settings::saveMode() const
+{
+    return m_saveMode;
+}
+
+QString Settings::playlistsPath() const
+{
+    return tr("data/pls/");
 }

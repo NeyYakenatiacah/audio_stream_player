@@ -35,9 +35,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    MediaController controller(&instance);
-    MediaListManager pl_manager(&instance);
     Settings settings;
+
+    MediaController controller(&instance);
+    MediaListManager pl_manager(&instance, &settings);
+
 
 
 

@@ -17,6 +17,12 @@ MediaListPrivate::MediaListPrivate(VlcInstance * instance) : QObject(instance)
     m_instance = instance ? instance : new VlcInstance(VlcCommon::args());
 }
 
+MediaListPrivate::MediaListPrivate(const QString &name, VlcInstance *instance)
+{
+    m_instance = instance ? instance : new VlcInstance(VlcCommon::args());
+    m_name = name;
+}
+
 MediaListPrivate::~MediaListPrivate()
 {
     //if(!this->parent()) delete m_instance;
@@ -47,6 +53,21 @@ void MediaListPrivate::openMedia(MediaSource *src)
         });
 
         emit added(src);
+    }
+}
+
+void MediaListPrivate::removeMedia(MediaSource *src)
+{
+    int idx = 0;
+    for(auto it = m_sources.begin(); it != m_sources.end(); ++it)
+    {
+        if((*it) == src)
+        {
+            m_sources.erase(it);
+            emit removed(src);
+            delete src;
+        }
+        idx++;
     }
 }
 
@@ -104,6 +125,53 @@ bool MediaListPrivate::save(const QString &path)
     return false;
 }
 
+QJsonObject MediaListPrivate::jsonExport() const
+{
+    QJsonArray array;
+
+    for(const MediaSource * src : m_sources)
+    {
+        QJsonObject obj = src->toJson();
+        array << obj;
+    }
+
+    QJsonObject obj;
+    qDebug() << "Save: name: " << m_name;
+    obj["name"] = m_name;
+    qDebug() << "Save: size: " << array.size() << " " << m_sources.size();
+    obj["list"] = array;
+
+    return obj;
+}
+
+bool MediaListPrivate::jsonImport(const QJsonObject &obj)
+{
+    qDebug() << "JsonImport";
+    if(obj.contains("name"))
+    {
+        m_name = obj["name"].toString();
+    }
+    else
+    {
+        return false;
+    }
+
+    if(obj.contains("list"))
+    {
+        QJsonArray array = obj["list"].toArray();
+
+        for(const QJsonValue & val : array)
+        {
+            QJsonObject obj = val.toObject();
+            MediaSource * src = MediaSource::fromJson(obj, m_instance);
+
+            m_sources << src;
+        }
+    }
+    emit reloaded();
+    return true;
+}
+
 QString MediaListPrivate::name() const
 {
     return m_name;
@@ -112,4 +180,5 @@ QString MediaListPrivate::name() const
 void MediaListPrivate::setName(const QString &name)
 {
     m_name = name;
+    emit nameChanged();
 }

@@ -36,10 +36,9 @@ public:
     virtual ~MediaSource();
 
     static MediaSource * fromJson(const QJsonObject & json, VlcInstance * instance);
-
     const QJsonObject toJson() const;
 
-    //!
+    bool isValid() const;
 
     Q_INVOKABLE void select() const;
 
@@ -118,6 +117,8 @@ signals:
 public slots:
 
 private:
+
+    bool m_isLocal;
 
     QString m_url;
 

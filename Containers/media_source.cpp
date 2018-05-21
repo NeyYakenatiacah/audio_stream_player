@@ -12,6 +12,8 @@ MediaSource::MediaSource(const QString & location, bool localFile, VlcInstance *
 {
     qDebug() << "MediaSource : " << location;
     m_url = location;
+    m_isLocal = localFile;
+
     m_metaManager = new VlcMetaManager(this);
 
     connect(this, &MediaSource::durationChanged, this, &MediaSource::timeChanged);
@@ -22,6 +24,8 @@ MediaSource::MediaSource(const QString & location, VlcInstance * instance)
 {
     qDebug() << "MediaSource : " << location;
     m_url = location;
+    m_isLocal = true;
+
     m_metaManager = new VlcMetaManager(this);
 
     connect(this, &MediaSource::durationChanged, this, &MediaSource::timeChanged);
@@ -60,10 +64,22 @@ const QJsonObject MediaSource::toJson() const
 {
     QJsonObject obj;
 
-    obj["url"] = m_url;
-//! other properties
+    if(isValid())
+    {
+        obj[m_isLocal ? "path" : "url"] = m_url;
+    }
+    else
+    {
+        obj["url"] = QString();
+    }
+    //TODO: other properties
 
     return obj;
+}
+
+bool MediaSource::isValid() const
+{
+    return duration() > qint64(0);
 }
 
 void MediaSource::select() const
